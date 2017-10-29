@@ -1,0 +1,13 @@
+##SCANNING
+sudo iwlist wlan0 scan
+##WEP
+sudo iwconfig wlan0 essid testessid key s:safestpasswordever
+##WPA 
+wpa_passphrase MYSSID passphrase > MYSSID.conf 
+sudo wpa_supplicant -B -i wlan0 -D wext -c MYSSID.conf 
+sudo dhcpcd --nohook wpa_supplicant wlan0
+#unsecured? change the conf file to: 
+network={ 
+ ssid="MYSSID"
+ key_mgmt=NONE 
+}
