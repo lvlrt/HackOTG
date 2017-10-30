@@ -19,7 +19,7 @@ then
 	read scan_yn
 	if [ "$scan_yn" != "n" ]; 
 	then
-		sh ~/scan_networks.sh  
+		sh scan_networks.sh  
 	fi
 	echo ""
 	echo "Specify targets (comma seperated or range -), followed by [ENTER]:"
