@@ -78,6 +78,10 @@ if [ "$option" = "6" ]; then
 	echo $COMMAND" --proxy-module injectjs --js-data 'alert("HACKED!")'"
 	$(echo $COMMAND" --proxy-module injectjs --js-data 'alert("HACKED!")'")
 fi
+if [ "$option" = "7" ]; then
+	echo $COMMAND" --proxy-module injecthtml --html-file hacked.html"
+	$(echo $COMMAND" --proxy-module injecthtml --html-file hacked.html")
+fi
 if [ "$option" = "c" ]; then
 	echo "type your custom command:"
 	read custom
