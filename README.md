@@ -1,5 +1,7 @@
 # HackOTG
 A universal, portable, cross-platform security platform based on a RPi Zero
+You can find the first article here:
+https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/
 
 # Installation
 First get an sd card for in the Rpi zero formatted with a Raspbian image (may be the lite one).
@@ -85,4 +87,9 @@ Now you can SSH to this device with the default credentials (user: pi, pass: ras
 <pre>
 ifconfig usb0 192.168.7.3
 ssh pi@192.168.7.2
+</pre>
+
+To install the dependencies needed for all the articles, run the following script:
+<pre>
+sh HackOTG/setup_dependencies.sh
 </pre>
