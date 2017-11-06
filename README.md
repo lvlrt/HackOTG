@@ -62,6 +62,18 @@ echo -e "\nallow-hotplug usb0\niface usb0 inet static\naddress 192.168.7.2\nnetm
 touch boot/ssh
 </pre>
 
+Copy the software packages
+<pre>
+cd root/home/pi
+git clone https://github.com/larsveelaert/HackOTG
+</pre>
+
+Make it start up a hotspot
+<pre>
+sudo sed --in-place "/exit 0/d" /etc/rc.local
+echo "/bin/sh /home/pi/HackOTG/hotspot_start.sh" >> /etc/rc.local
+</pre>
+
 Sync and unmount
 <pre>
 sync
