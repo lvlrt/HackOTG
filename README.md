@@ -70,8 +70,8 @@ git clone https://github.com/larsveelaert/HackOTG
 
 Make it start up a hotspot
 <pre>
-sudo sed --in-place "/exit 0/d" /etc/rc.local
-echo "/bin/sh /home/pi/HackOTG/hotspot_start.sh" >> /etc/rc.local
+sudo sed --in-place "/exit 0/d" root/etc/rc.local
+echo -e "/bin/sh /home/pi/HackOTG/hotspot_start.sh\nexit 0\n" >> root/etc/rc.local
 </pre>
 
 Sync and unmount
