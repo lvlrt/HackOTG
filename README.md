@@ -57,5 +57,5 @@ mount /dev/mmcblk1p2 root #change mmcblk1 part into your device
 echo 'dtoverlay=dwc2' >> boot/config.txt
 echo -e "dwc2\ng_ether" >> root/etc/modules
 
-echo -e "\nallow-hotplug usb0\niface usb0 inet static\naddress 192.168.7.2\nnetmask 255.255.255.0\nnetwork 192.168.7.0\nbroadcast 192.168.7.255\ngateway 192.168.7.1" >> /etc/network/interfaces
+echo -e "\nallow-hotplug usb0\niface usb0 inet static\naddress 192.168.7.2\nnetmask 255.255.255.0\nnetwork 192.168.7.0\nbroadcast 192.168.7.255\ngateway 192.168.7.1" >> root/etc/network/interfaces
 </pre>
