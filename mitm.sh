@@ -73,20 +73,20 @@ if [ "$option" = "4" ]; then
 	$(echo $COMMAND" --proxy --proxy-https -P POST")
 fi
 if [ "$option" = "5" ]; then
-	echo $(echo $COMMAND" --proxy-module injectcss --css-file pink.css")
-	$(echo $COMMAND" --proxy-module injectcss --css-file pink.css")
+	echo $(echo $COMMAND" --proxy-module injectcss --css-file injection_files/pink.css")
+	$(echo $COMMAND" --proxy-module injectcss --css-file injection_files/pink.css")
 fi
 if [ "$option" = "6" ]; then
 	echo $COMMAND" --proxy-module injectjs --js-data 'alert("HACKED!")'"
 	$(echo $COMMAND" --proxy-module injectjs --js-data 'alert("HACKED!")'")
 fi
 if [ "$option" = "7" ]; then
-	echo $COMMAND" --proxy-module injecthtml --html-file hacked.html"
-	$(echo $COMMAND" --proxy-module injecthtml --html-file hacked.html")
+	echo $COMMAND" --proxy-module injecthtml --html-file injection_files/hacked.html"
+	$(echo $COMMAND" --proxy-module injecthtml --html-file injection_files/hacked.html")
 fi
 if [ "$option" = "8" ]; then
-	echo $COMMAND" --proxy-module injecthtml --html-file baby.html"
-	$(echo $COMMAND" --proxy-module injecthtml --html-file baby.html")
+	echo $COMMAND" --proxy-module injecthtml --html-file injection_files/baby.html"
+	$(echo $COMMAND" --proxy-module injecthtml --html-file injection_files/baby.html")
 fi
 if [ "$option" = "c" ]; then
 	echo "type your custom command:"

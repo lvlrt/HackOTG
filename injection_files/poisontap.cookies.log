@@ -1,0 +1,15 @@
+==== 2017-11-07T17:17:02.071Z [1510075022080] ====
+PoisonTap is listening
+==== 2017-11-07T17:17:57.874Z [1510075077883] ====
+PoisonTap is listening
+Request: 192.168.7.2:1337/
+{ host: '192.168.7.2:1337',
+  connection: 'keep-alive',
+  'user-agent': 'Mozilla/5.0 (X11; CrOS x86_64 10089.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3255.0 Safari/537.36',
+  'upgrade-insecure-requests': '1',
+  accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding': 'gzip, deflate',
+  'accept-language': 'en,nl;q=0.9,en-GB;q=0.8' }
+>>> Inject Target xhtmljs
+==== 2017-11-07T17:19:26.170Z [1510075166179] ====
+PoisonTap is listening
