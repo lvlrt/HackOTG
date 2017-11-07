@@ -1,3 +1,9 @@
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
 
 sudo apt-get update
-sudo apt-get install git vim 
+sudo apt-get install git vim nmap hostapd dnsmasq build-essential ruby-dev libpcap-dev tshark --fix-missing
+
+sudo gem install bettercap
+
