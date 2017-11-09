@@ -5,9 +5,12 @@ import os
 
 #create directory and gitignore it
 directory="copied_network_profiles"
-p = Popen("mkdir "+directory+" && touch "+directory+"/.gitignore", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+p = Popen("sudo iwlist wlan0 scan | grep -A 5 'Cell'", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+test=[]
 for line in p.stdout.read().splitlines():
+    test.append(line.decode("utf-8"))
     print(line.decode("utf-8"))
+
 
 #show all the old ones available
 # if captive portal with that name is found, reuse, if none ask if I want one
