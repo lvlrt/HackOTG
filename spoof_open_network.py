@@ -3,6 +3,7 @@
 from subprocess import Popen, PIPE, STDOUT
 import os
 import time
+import sys
 
 #TODO all scripts relative to this document (basename)
 
@@ -246,16 +247,25 @@ else:
 #TODO make a folder with the captive portal and the injected file inserted into it.
 
 # ask to spoof now
-print("Do you want to start spoofing with the following options? (Y/n)") #Give input option 0 for create new, and add all the other ones, q = quit
+print("Do you want to start spoofing with the following options?") #Give input option 0 for create new, and add all the other ones, q = quit
 #TODO loop rhough all options
 for key in spoof_options:
     print(key+": "+str(spoof_options[key]))
+print("(Y/n): ")
 answer=input()
 print("")
 
+#folliwing all in one commnad? popeeN?
 #TODO start op server 
 #TODO start up dnsspoof
-#TODO start up hostapd with all the settings (maybe bssid) -> use external script 
+
+#start up hostapd with all the settings (maybe bssid) -> use external script 
+#TODO more spoofing options?
+p = Popen("sh /home/pi/HackOTG/hotspot_start.sh "+spoof_essid+" && sudo dnsspoof -i wlan0 port 53&", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+for line in iter(p.stdout.readline, ""):
+        print('\r'+line[:-1].decode("utf-8"))
+
+#TODO get the info lines as it is coming in
 
 #TODO trap if quit that cleans up all processes
 
