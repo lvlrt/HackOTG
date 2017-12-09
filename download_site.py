@@ -21,26 +21,33 @@ url=sys.argv[1]
 if len(sys.argv) == 3:
     savename=sys.argv[2]
 else:
-    savename=url
+    savename=url.replace("http://","").replace("https://","")
 
 while 1==1:                                                   
     #delete previous
-    p = Popen("rm -Rf "+directory+"/"+url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    p = Popen("rm -Rf "+directory+"/"+url+" && rm -Rf "+directory+"/temp_wget", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
     for line in p.stdout.read().splitlines():
         print(line.decode("utf-8"))
     p.communicate()
 
+    #render javascript of website
+    p = Popen("phantomjs resources/get_redirection_url_phantomjs.js "+url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    redirected_url=""
+    for line in p.stdout.read().splitlines():
+        redirected_url=line.decode("utf-8").rstrip()
+    p.communicate()
+
     #download file
-    p = Popen("cd copied_sites && wget -c -N -mkEpnp -l 1 --max-redirect=100 "+url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    p = Popen("cd copied_sites && wget -c -N -mkEpnp -l 1 --max-redirect=100 -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
     for line in p.stdout.read().splitlines():
         print(line.decode("utf-8"))
     p.communicate()
     
-    if len(os.listdir(directory+"/"+url)) > 0:
+    if len(os.listdir(directory+"/temp_wget")) > 0:
         # file exists
         redirects=False
         redirect_url=""
-        
+        """
         for filename in os.listdir(directory+"/"+url):
             with open(directory+"/"+url+"/"+filename) as f:
                 for line in f.readlines():
@@ -85,5 +92,13 @@ while 1==1:
                 print(line.decode("utf-8"))
             p.communicate()
             break
+        """
+        print("OK and no further redirects");
+        #TODO rename to savename
+        p = Popen("rm -Rf "+directory+"/"+savename+" && mv "+directory+"/temp_wget/* "+directory+"/"+savename, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        for line in p.stdout.read().splitlines():
+            print(line.decode("utf-8"))
+        p.communicate()
+        break
     else:
         print("wget command copy failed")
