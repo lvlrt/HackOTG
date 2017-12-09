@@ -1,0 +1,945 @@
+<!doctype html >
+<!--[if IE 8]><html
+class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9]><html
+class="ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html
+lang="en-GB" prefix="og: http://ogp.me/ns#"> <!--<![endif]--><head><link
+rel="stylesheet" type="text/css" href="https://demgeeks.com/wp-content/cache/minify/0b253.css" media="all" /><title>Get all your updates in your mailbox with RSS - Dem Geeks</title><meta
+charset="UTF-8" /><meta
+name="viewport" content="width=device-width, initial-scale=1.0"><link
+rel="pingback" href="https://demgeeks.com/xmlrpc.php" /><meta
+property="og:image" content="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?fit=752%2C636&ssl=1" /><meta
+name="author" content="Lars Veelaert"><link
+rel="icon" type="image/png" href="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks_square-300x300.png"><link
+rel="apple-touch-icon-precomposed" sizes="76x76" href="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks_square-300x300.png"/><link
+rel="apple-touch-icon-precomposed" sizes="120x120" href="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks_square-300x300.png"/><link
+rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks_square-300x300.png"/><link
+rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks_square-300x300.png"/><link
+rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks_square-300x300.png"/><link
+rel="canonical" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/" /><meta
+property="og:locale" content="en_GB" /><meta
+property="og:type" content="article" /><meta
+property="og:title" content="Get all your updates in your mailbox with RSS - Dem Geeks" /><meta
+property="og:description" content="So I have a couple sites I check regularly&#8230; YouTube, a couple blogs, Reddit-pages, LinkedIn and some news-sites. Often it happens that I miss some interesting article, or in general, I have to remember to check it. It&#8217;s not very productive to have the feeling you have to check everything, all the time. A good &hellip;" /><meta
+property="og:url" content="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/" /><meta
+property="og:site_name" content="Dem Geeks" /><meta
+property="article:tag" content="bash" /><meta
+property="article:tag" content="cli" /><meta
+property="article:tag" content="command-line" /><meta
+property="article:tag" content="console. self-hosted. self-hosting. DIY" /><meta
+property="article:tag" content="decentralization" /><meta
+property="article:tag" content="development" /><meta
+property="article:tag" content="diy" /><meta
+property="article:tag" content="email" /><meta
+property="article:tag" content="linux" /><meta
+property="article:tag" content="mutt" /><meta
+property="article:tag" content="networking" /><meta
+property="article:tag" content="news" /><meta
+property="article:tag" content="productivity" /><meta
+property="article:tag" content="rss" /><meta
+property="article:tag" content="terminal" /><meta
+property="article:tag" content="tips" /><meta
+property="article:tag" content="updates" /><meta
+property="article:section" content="Productivity" /><meta
+property="article:published_time" content="2017-09-29T10:11:30+00:00" /><meta
+property="article:modified_time" content="2017-09-30T12:18:00+00:00" /><meta
+property="og:updated_time" content="2017-09-30T12:18:00+00:00" /><meta
+property="og:image" content="https://demgeeks.com/wp-content/uploads/2017/09/tmi.jpg" /><meta
+property="og:image:secure_url" content="https://demgeeks.com/wp-content/uploads/2017/09/tmi.jpg" /><meta
+property="og:image:width" content="752" /><meta
+property="og:image:height" content="636" /><meta
+name="twitter:card" content="summary" /><meta
+name="twitter:description" content="So I have a couple sites I check regularly&#8230; YouTube, a couple blogs, Reddit-pages, LinkedIn and some news-sites. Often it happens that I miss some interesting article, or in general, I have to remember to check it. It&#8217;s not very productive to have the feeling you have to check everything, all the time. A good [&hellip;]" /><meta
+name="twitter:title" content="Get all your updates in your mailbox with RSS - Dem Geeks" /><meta
+name="twitter:image" content="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?fit=752%2C636&#038;ssl=1" /> <script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/demgeeks.com\/","name":"Dem Geeks","potentialAction":{"@type":"SearchAction","target":"https:\/\/demgeeks.com\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script> <link
+rel='dns-prefetch' href='//s0.wp.com' /><link
+rel='dns-prefetch' href='//secure.gravatar.com' /><link
+rel='dns-prefetch' href='//fonts.googleapis.com' /><link
+rel='dns-prefetch' href='//s.w.org' /><link
+rel="alternate" type="application/rss+xml" title="Dem Geeks &raquo; Feed" href="https://demgeeks.com/feed/" /><link
+rel="alternate" type="application/rss+xml" title="Dem Geeks &raquo; Comments Feed" href="https://demgeeks.com/comments/feed/" /><link
+rel="alternate" type="application/rss+xml" title="Dem Geeks &raquo; Get all your updates in your mailbox with RSS Comments Feed" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/feed/" /> <script type="text/javascript">window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/demgeeks.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.8.2"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b!==c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);</script> <style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}</style><link
+rel='stylesheet' id='google_font_work_sans-css'  href='https://fonts.googleapis.com/css?family=Work+Sans%3A400%2C500%2C600%2C700&#038;ver=4.8.2' type='text/css' media='all' /><link
+rel='stylesheet' id='google_font_source_sans_pro-css'  href='https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C400italic%2C600%2C600italic%2C700&#038;ver=4.8.2' type='text/css' media='all' /><link
+rel='stylesheet' id='google_font_droid_serif-css'  href='https://fonts.googleapis.com/css?family=Droid+Serif%3A400%2C700&#038;ver=4.8.2' type='text/css' media='all' /><!--[if lte IE 8]><link
+rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://demgeeks.com/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel-ie8fix.css?ver=20121024' type='text/css' media='all' />
+<![endif]--> <script type="text/javascript" src="https://demgeeks.com/wp-content/cache/minify/df983.js"></script> <script type='text/javascript'>/*  */
+var related_posts_js_options = {"post_heading":"h4"};
+/*  */</script> <script type="text/javascript" src="https://demgeeks.com/wp-content/cache/minify/d7e4e.js"></script> <link
+rel='https://api.w.org/' href='https://demgeeks.com/wp-json/' /><link
+rel="EditURI" type="application/rsd+xml" title="RSD" href="https://demgeeks.com/xmlrpc.php?rsd" /><link
+rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://demgeeks.com/wp-includes/wlwmanifest.xml" /><meta
+name="generator" content="WordPress 4.8.2" /><link
+rel='shortlink' href='https://wp.me/p8mope-bP' /><link
+rel="alternate" type="application/json+oembed" href="https://demgeeks.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F" /><link
+rel="alternate" type="text/xml+oembed" href="https://demgeeks.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F&#038;format=xml" /><link
+rel='dns-prefetch' href='//v0.wordpress.com'/><link
+rel='dns-prefetch' href='//i0.wp.com'/><link
+rel='dns-prefetch' href='//i1.wp.com'/><link
+rel='dns-prefetch' href='//i2.wp.com'/><style type='text/css'>img#wpstats{display:none}</style><!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+ <script>var tdBlocksArray = []; //here we store all the items for the current page
+
+	    //td_block class - each ajax block uses a object of this class for requests
+	    function tdBlock() {
+		    this.id = '';
+		    this.block_type = 1; //block type id (1-234 etc)
+		    this.atts = '';
+		    this.td_column_number = '';
+		    this.td_current_page = 1; //
+		    this.post_count = 0; //from wp
+		    this.found_posts = 0; //from wp
+		    this.max_num_pages = 0; //from wp
+		    this.td_filter_value = ''; //current live filter value
+		    this.is_ajax_running = false;
+		    this.td_user_action = ''; // load more or infinite loader (used by the animation)
+		    this.header_color = '';
+		    this.ajax_pagination_infinite_stop = ''; //show load more at page x
+	    }
+
+
+        // td_js_generator - mini detector
+        (function(){
+            var htmlTag = document.getElementsByTagName("html")[0];
+
+            if ( navigator.userAgent.indexOf("MSIE 10.0") > -1 ) {
+                htmlTag.className += ' ie10';
+            }
+
+            if ( !!navigator.userAgent.match(/Trident.*rv\:11\./) ) {
+                htmlTag.className += ' ie11';
+            }
+
+            if ( /(iPad|iPhone|iPod)/g.test(navigator.userAgent) ) {
+                htmlTag.className += ' td-md-is-ios';
+            }
+
+            var user_agent = navigator.userAgent.toLowerCase();
+            if ( user_agent.indexOf("android") > -1 ) {
+                htmlTag.className += ' td-md-is-android';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Mac OS X')  ) {
+                htmlTag.className += ' td-md-is-os-x';
+            }
+
+            if ( /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()) ) {
+               htmlTag.className += ' td-md-is-chrome';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Firefox') ) {
+                htmlTag.className += ' td-md-is-firefox';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Safari') && -1 === navigator.userAgent.indexOf('Chrome') ) {
+                htmlTag.className += ' td-md-is-safari';
+            }
+
+            if( -1 !== navigator.userAgent.indexOf('IEMobile') ){
+                htmlTag.className += ' td-md-is-iemobile';
+            }
+
+        })();
+
+
+
+
+        var tdLocalCache = {};
+
+        ( function () {
+            "use strict";
+
+            tdLocalCache = {
+                data: {},
+                remove: function (resource_id) {
+                    delete tdLocalCache.data[resource_id];
+                },
+                exist: function (resource_id) {
+                    return tdLocalCache.data.hasOwnProperty(resource_id) && tdLocalCache.data[resource_id] !== null;
+                },
+                get: function (resource_id) {
+                    return tdLocalCache.data[resource_id];
+                },
+                set: function (resource_id, cachedData) {
+                    tdLocalCache.remove(resource_id);
+                    tdLocalCache.data[resource_id] = cachedData;
+                }
+            };
+        })();
+
+    
+    
+var tds_login_sing_in_widget="show";
+var td_viewport_interval_list=[{"limitBottom":767,"sidebarWidth":228},{"limitBottom":1018,"sidebarWidth":300},{"limitBottom":1140,"sidebarWidth":300}];
+var td_animation_stack_effect="type0";
+var tds_animation_stack=true;
+var td_animation_stack_specific_selectors=".entry-thumb, img";
+var td_animation_stack_general_selectors=".td-animation-stack img, .td-animation-stack .entry-thumb, .post img";
+var td_ajax_url="https:\/\/demgeeks.com\/wp-admin\/admin-ajax.php?td_theme_name=ionMag&v=1.3";
+var td_get_template_directory_uri="https:\/\/demgeeks.com\/wp-content\/themes\/IonMag";
+var tds_snap_menu="";
+var tds_logo_on_sticky="";
+var tds_header_style="";
+var td_please_wait="Please wait...";
+var td_email_user_pass_incorrect="User or password incorrect!";
+var td_email_user_incorrect="Email or username incorrect!";
+var td_email_incorrect="Email incorrect!";
+var tds_more_articles_on_post_enable="";
+var tds_more_articles_on_post_time_to_wait="";
+var tds_more_articles_on_post_pages_distance_from_top=0;
+var tds_theme_color_site_wide="#4db2ec";
+var tds_smart_sidebar="";
+var tdThemeName="ionMag";
+var td_magnific_popup_translation_tPrev="Previous (Left arrow key)";
+var td_magnific_popup_translation_tNext="Next (Right arrow key)";
+var td_magnific_popup_translation_tCounter="%curr% of %total%";
+var td_magnific_popup_translation_ajax_tError="The content from %url% could not be loaded.";
+var td_magnific_popup_translation_image_tError="The image #%curr% could not be loaded.";
+var tds_video_playlists=false;
+var td_ad_background_click_link="";
+var td_ad_background_click_target="";</script> <style>.td-menu-background:before,
+    .td-search-background:before {
+        background: rgba(255,255,255,0.9);
+    }
+    
+    
+    .td-footer-outer-wrapper:before {
+        background-size: cover;
+    }
+
+    
+    .td-footer-outer-wrapper:before {
+        background-position: center center;
+    }
+
+    
+    .td-footer-outer-wrapper:before {
+        opacity: 0.16;
+    }</style> <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91315183-1', 'auto');
+  ga('send', 'pageview');</script><link
+rel="icon" href="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/01/cropped-2Artboard-1-2.png?fit=32%2C32&#038;ssl=1" sizes="32x32" /><link
+rel="icon" href="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/01/cropped-2Artboard-1-2.png?fit=192%2C192&#038;ssl=1" sizes="192x192" /><link
+rel="apple-touch-icon-precomposed" href="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/01/cropped-2Artboard-1-2.png?fit=180%2C180&#038;ssl=1" /><meta
+name="msapplication-TileImage" content="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/01/cropped-2Artboard-1-2.png?fit=270%2C270&#038;ssl=1" /><style type="text/css" id="wp-custom-css">/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+.td-crumb-container {
+margin-bottom:0px;
+}
+.td-big-grid-post .td-module-thumb {
+  background-color: #ffffff!important;
+}
+.td-module-thumb .entry-thumb {
+ min-height:100%;
+}
+.output {
+background-color:black;
+color:white;
+}
+.td-post-template-default .td-post-featured-image {
+padding-right:10px;
+	padding-left:10px;
+}
+.td-post-content img, .wpb_text_column img, .td_block_text_with_title img, .woocommerce #tab-description img, .mce-content-body
+img {
+	max-height:500px;
+	width:auto;
+}</style></head><body
+class="post-template-default single single-post postid-733 single-format-standard get-all-your-updates-in-your-mailbox-with-rss td-animation-stack-type0 td-full-layout" itemscope="itemscope" itemtype="https://schema.org/WebPage"><div
+class="td-scroll-up"><i
+class="td-icon-menu-up"></i></div><div
+class="td-menu-background"></div><div
+id="td-mobile-nav"><div
+class="td-mobile-container"><div
+class="td-menu-socials-wrap"><div
+class="td-menu-socials">
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.facebook.com/demgeeks/" title="Facebook">
+<i
+class="td-icon-font td-icon-facebook"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.linkedin.com/company/demgeeks.com" title="Linkedin">
+<i
+class="td-icon-font td-icon-linkedin"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="mailto:questions@demgeeks.com" title="Mail">
+<i
+class="td-icon-font td-icon-mail-1"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://twitter.com/dem_geeks" title="Twitter">
+<i
+class="td-icon-font td-icon-twitter"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.youtube.com/channel/UC03g7GzJMI_fNL4tMj6wo7A" title="Youtube">
+<i
+class="td-icon-font td-icon-youtube"></i>
+</a>
+</span></div><div
+class="td-mobile-close">
+<a
+href="#"><i
+class="td-icon-close-mobile"></i></a></div></div><div
+class="td-menu-login-section"><div
+class="td-guest-wrap"><div
+class="td-menu-avatar"><div
+class="td-avatar-container"><img
+alt='' src='https://secure.gravatar.com/avatar/?s=80&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo avatar-default' height='80' width='80' /></div></div><div
+class="td-menu-login"><a
+id="login-link-mob">Sign in</a></div></div></div><div
+class="td-mobile-content"><div
+class="menu-td-demo-header-menu-container"><ul
+id="menu-td-demo-header-menu" class="td-mobile-main-menu"><li
+id="menu-item-359" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-first menu-item-359"><a
+href="https://demgeeks.com/">Home</a></li><li
+id="menu-item-599" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-599"><a
+href="https://demgeeks.com/category/quick-tips/">Quick Tips</a></li><li
+id="menu-item-600" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-600"><a
+href="https://demgeeks.com/category/hacking/">Hacking</a></li><li
+id="menu-item-764" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-764"><a
+href="https://demgeeks.com/category/productivity/">Productivity</a></li><li
+id="menu-item-763" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-763"><a
+href="https://demgeeks.com/category/eli5/">ELI5</a></li><li
+id="menu-item-598" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-598"><a
+href="https://demgeeks.com/category/coding/">Coding</a></li></ul></div></div></div><div
+id="login-form-mobile" class="td-register-section"><div
+id="td-login-mob" class="td-login-animation td-login-hide-mob"><div
+class="td-login-close">
+<a
+href="#" class="td-back-button"><i
+class="td-icon-read-down"></i></a><div
+class="td-login-title">Sign in</div><div
+class="td-mobile-close">
+<a
+href="#"><i
+class="td-icon-close-mobile"></i></a></div></div><div
+class="td-login-form-wrap"><div
+class="td-login-panel-title"><span>Welcome!</span>Log into your account</div><div
+class="td_display_err"></div><div
+class="td-login-inputs"><input
+class="td-login-input" type="text" name="login_email" id="login_email-mob" value="" required><label>your username</label></div><div
+class="td-login-inputs"><input
+class="td-login-input" type="password" name="login_pass" id="login_pass-mob" value="" required><label>your password</label></div>
+<input
+type="button" name="login_button" id="login_button-mob" class="td-login-button" value="LOG IN"><div
+class="td-login-info-text"><a
+href="#" id="forgot-pass-link-mob">Forgot your password?</a></div></div></div><div
+id="td-forgot-pass-mob" class="td-login-animation td-login-hide-mob"><div
+class="td-forgot-pass-close">
+<a
+href="#" class="td-back-button"><i
+class="td-icon-read-down"></i></a><div
+class="td-login-title">Password recovery</div></div><div
+class="td-login-form-wrap"><div
+class="td-login-panel-title">Recover your password</div><div
+class="td_display_err"></div><div
+class="td-login-inputs"><input
+class="td-login-input" type="text" name="forgot_email" id="forgot_email-mob" value="" required><label>your email</label></div>
+<input
+type="button" name="forgot_button" id="forgot_button-mob" class="td-login-button" value="Send My Pass"></div></div></div></div><div
+class="td-search-background"></div><div
+class="td-search-wrap-mob"><div
+class="td-drop-down-search" aria-labelledby="td-header-search-button"><form
+method="get" class="td-search-form" action="https://demgeeks.com/"><div
+class="td-search-close">
+<a
+href="#"><i
+class="td-icon-close-mobile"></i></a></div><div
+role="search" class="td-search-input">
+<span>Search</span>
+<input
+id="td-header-search-mob" type="text" value="" name="s" autocomplete="off" /></div></form><div
+id="td-aj-search-mob"></div></div></div><div
+id="td-outer-wrap" class="td-theme-wrap"><div
+class="td-header-wrap td-header-style-1"><div
+class="td-header-top-menu td-container-wrap"><div
+class="td-container"><div
+class="top-bar-style-1"><div
+class="td-header-sp-top-menu"><div
+class="td_data_time"><div >Sunday, October 29, 2017</div></div><ul
+class="top-header-menu td_ul_login"><li
+class="menu-item"><a
+class="td-login-modal-js menu-item" href="#login-form" data-effect="mpf-td-login-effect">Sign in / Join</a><span
+class="td-sp-ico-login td_sp_login_ico_style"></span></li></ul><div
+class="menu-top-container"><ul
+id="menu-td-demo-top-menu" class="top-header-menu"><li
+id="menu-item-347" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-first td-menu-item td-normal-menu menu-item-347"><a
+href="#">About</a></li><li
+id="menu-item-348" class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-348"><a
+href="#">Contact</a></li></ul></div></div><div
+class="td-header-sp-top-widget">
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.facebook.com/demgeeks/" title="Facebook">
+<i
+class="td-icon-font td-icon-facebook"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.linkedin.com/company/demgeeks.com" title="Linkedin">
+<i
+class="td-icon-font td-icon-linkedin"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="mailto:questions@demgeeks.com" title="Mail">
+<i
+class="td-icon-font td-icon-mail-1"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://twitter.com/dem_geeks" title="Twitter">
+<i
+class="td-icon-font td-icon-twitter"></i>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.youtube.com/channel/UC03g7GzJMI_fNL4tMj6wo7A" title="Youtube">
+<i
+class="td-icon-font td-icon-youtube"></i>
+</a>
+</span></div></div><div
+id="login-form" class="white-popup-block mfp-hide mfp-with-anim"><div
+class="td-login-wrap">
+<a
+href="#" class="td-back-button"><i
+class="td-icon-modal-back"></i></a><div
+id="td-login-div" class="td-login-form-div td-display-block"><div
+class="td-login-panel-title">Sign in</div><div
+class="td-login-panel-descr">Welcome! Log into your account</div><div
+class="td_display_err"></div><div
+class="td-login-inputs"><input
+class="td-login-input" type="text" name="login_email" id="login_email" value="" required><label>your username</label></div><div
+class="td-login-inputs"><input
+class="td-login-input" type="password" name="login_pass" id="login_pass" value="" required><label>your password</label></div>
+<input
+type="button" name="login_button" id="login_button" class="wpb_button btn td-login-button" value="Login"><div
+class="td-login-info-text"><a
+href="#" id="forgot-pass-link">Forgot your password? Get help</a></div></div><div
+id="td-forgot-pass-div" class="td-login-form-div td-display-none"><div
+class="td-login-panel-title">Password recovery</div><div
+class="td-login-panel-descr">Recover your password</div><div
+class="td_display_err"></div><div
+class="td-login-inputs"><input
+class="td-login-input" type="text" name="forgot_email" id="forgot_email" value="" required><label>your email</label></div>
+<input
+type="button" name="forgot_button" id="forgot_button" class="wpb_button btn td-login-button" value="Send My Password"><div
+class="td-login-info-text">A password will be e-mailed to you.</div></div></div></div></div></div><div
+class="td-header-logo-wrap td-container-wrap"><div
+class="td-container"><div
+class="td-header-sp-logo">
+<a
+class="td-main-logo" href="https://demgeeks.com/">
+<img
+class="td-retina-data" data-retina="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1-300x140.png" src="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1-300x140.png" alt=""/>
+<span
+class="td-visual-hidden">Dem Geeks</span>
+</a></div><div
+class="td-header-sp-recs"><div
+class="td-header-rec-wrap"></div></div></div></div><div
+class="td-header-menu-wrap-full td-container-wrap"><div
+class="td-header-menu-wrap"><div
+class="td-container td-header-main-menu"><div
+id="td-header-menu" role="navigation"><div
+id="td-top-mobile-toggle"><a
+href="#"><i
+class="td-icon-font td-icon-mobile"></i></a></div><div
+class="td-main-menu-logo td-logo-in-header">
+<a
+class="td-mobile-logo td-sticky-disable" href="https://demgeeks.com/">
+<img
+class="td-retina-data" data-retina="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1_white-300x140.png" src="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1_white-300x140.png" alt=""/>
+</a>
+<a
+class="td-header-logo td-sticky-disable" href="https://demgeeks.com/">
+<img
+class="td-retina-data" data-retina="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1-300x140.png" src="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1-300x140.png" alt=""/>
+</a></div><div
+class="menu-td-demo-header-menu-container"><ul
+id="menu-td-demo-header-menu-1" class="sf-menu"><li
+class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-first td-menu-item td-normal-menu menu-item-359"><a
+href="https://demgeeks.com/">Home</a></li><li
+class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-599"><a
+href="https://demgeeks.com/category/quick-tips/">Quick Tips</a></li><li
+class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-600"><a
+href="https://demgeeks.com/category/hacking/">Hacking</a></li><li
+class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent td-menu-item td-normal-menu menu-item-764"><a
+href="https://demgeeks.com/category/productivity/">Productivity</a></li><li
+class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-763"><a
+href="https://demgeeks.com/category/eli5/">ELI5</a></li><li
+class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-598"><a
+href="https://demgeeks.com/category/coding/">Coding</a></li></ul></div></div><div
+class="td-header-menu-search"><div
+class="td-search-btns-wrap">
+<a
+id="td-header-search-button" href="#" role="button" class="dropdown-toggle " data-toggle="dropdown"><i
+class="td-icon-search"></i></a>
+<a
+id="td-header-search-button-mob" href="#" role="button" class="dropdown-toggle " data-toggle="dropdown"><i
+class="td-icon-search"></i></a></div><div
+class="td-search-box-wrap"><div
+class="td-drop-down-search" aria-labelledby="td-header-search-button"><form
+method="get" class="td-search-form" action="https://demgeeks.com/"><div
+role="search" class="td-head-form-search-wrap">
+<input
+id="td-header-search" type="text" value="" name="s" autocomplete="off" /><input
+class="wpb_button wpb_btn-inverse btn" type="submit" id="td-header-search-top" value="Search" /></div></form><div
+id="td-aj-search"></div></div></div></div></div></div></div></div><div
+class="td-main-content-wrap td-container-wrap"><div
+class="td-container td-post-template-default "><div
+class="td-crumb-container"></div><div
+class="td-pb-row"><div
+class="td-pb-span12 td-main-content" role="main"><div
+class="td-ss-main-content">
+<article
+id="post-733" class="post-733 post type-post status-publish format-standard has-post-thumbnail hentry category-productivity tag-bash tag-cli tag-command-line tag-console-self-hosted-self-hosting-diy tag-decentralization tag-development tag-diy tag-email tag-linux tag-mutt tag-networking tag-news tag-productivity tag-rss tag-terminal tag-tips tag-updates" itemscope itemtype="https://schema.org/Article"><div
+class="td-post-header"><ul
+class="td-category"><li
+class="entry-category"><a
+href="https://demgeeks.com/category/productivity/">Productivity</a></li></ul>
+<header
+class="td-post-title"><h1 class="entry-title">Get all your updates in your mailbox with RSS</h1><div
+class="td-module-meta-info"><div
+class="td-post-author-name"><div
+class="td-author-by">By</div> <a
+href="https://demgeeks.com/author/lars-veelaert/">Lars Veelaert</a><div
+class="td-author-line"> -</div></div>                    <span
+class="td-post-date"><time
+class="entry-date updated td-module-date" datetime="2017-09-29T10:11:30+00:00" >September 29, 2017</time></span><div
+class="td-post-comments"><a
+href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/#respond"><i
+class="td-icon-comments"></i>0</a></div><div
+class="td-post-views-wrap"><div
+class="td-post-views"><i
+class="td-icon-views"></i><span
+class="td-nr-views-733">27</span></div>                                                    <span
+class="td-post-views-text">views</span></div></div>
+</header></div><div
+class="td-post-sharing td-post-sharing-top "><div
+class="td-default-sharing">
+<a
+class="td-social-sharing-buttons td-social-facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+class="td-icon-facebook"></i><div
+class="td-social-but-text">Share on Facebook</div></a>
+<a
+class="td-social-sharing-buttons td-social-twitter" href="https://twitter.com/intent/tweet?text=Get+all+your+updates+in+your+mailbox+with+RSS&url=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F&via=dem_geeks"  ><i
+class="td-icon-twitter"></i><div
+class="td-social-but-text">Tweet on Twitter</div></a>
+<a
+class="td-social-sharing-buttons td-social-google" href="http://plus.google.com/share?url=https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+class="td-icon-googleplus"></i></a>
+<a
+class="td-social-sharing-buttons td-social-pinterest" href="http://pinterest.com/pin/create/button/?url=https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/&amp;media=https://demgeeks.com/wp-content/uploads/2017/09/tmi.jpg&description=Get+all+your+updates+in+your+mailbox+with+RSS" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+class="td-icon-pinterest"></i></a>
+<a
+class="td-social-sharing-buttons td-social-whatsapp" href="whatsapp://send?text=Get+all+your+updates+in+your+mailbox+with+RSS%20-%20https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F" ><i
+class="td-icon-whatsapp"></i></a></div></div><div
+class="td-post-content"><div
+class="td-post-featured-image"><a
+href="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?fit=752%2C636&ssl=1" data-caption=""><img
+width="752" height="636" class="entry-thumb td-modal-image" src="https://demgeeks.com/wp-content/uploads/2017/09/tmi.jpg" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?w=752&ssl=1 752w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?resize=300%2C254&ssl=1 300w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?resize=640%2C541&ssl=1 640w" sizes="(max-width: 752px) 100vw, 752px" alt="" title="tmi"/></a></div><p>So I have a couple sites I check regularly&#8230; YouTube, a couple blogs, Reddit-pages, LinkedIn and some news-sites. Often it happens that I miss some interesting article, or in general, I have to remember to check it. It&#8217;s not very productive to have the feeling you have to check everything, all the time.</p><p>A good way to go about this is subscribing to newsletters and reviewing settings of your online accounts to have messages send to your mail inbox. Great, but not every simple site has this option and newsletters often are to bloated with ads and calls to action to be fun to read.</p><p>I&#8217;ve wanted to solve this problem for quite a while but never found a good solution. My general philosophy is having everything on every device working in exactly the same way. I make sure I get a terminal on every device and from there I open my Linux environment with all my tools setup and synced.</p><h2>And then I discovered RSS</h2><p>Most sites today offer a RSS-feed. This is a file that resides somewhere on the domain (often linked somewhere on the homepage) and is a very simple XML file that has a summary of the meaningful changes to a site. Most engines like WordPress and Joomla have it by default. And any major site will support it (I havent found one that does not). Sometimes a Google-search is needed to find the right URL for sites like Reddit, but it&#8217;s (nearly) always there.</p><h2>The problem</h2><p>So if you have all your links of RSS-feeds, you can put them in a program that handles all the news for you. In the early days there was <a
+href="https://www.google.com/reader/about/">Google Reader</a> but that is gone right now (it did not fit the Google marketing anymore).There are apps like <a
+href="https://feedly.com/">Feedly</a> to replace it and many <a
+href="https://www.howtogeek.com/128487/the-best-free-rss-readers-for-keeping-up-with-your-favorite-websites/">others</a>.</p><p>These are definitely great, but I don&#8217;t like standalone programs. I&#8217;d like my news to end up in my mailbox. I tried online RSS to Email converters like <a
+href="https://blogtrottr.com/">Blogtrottr</a> but never really liked it. It failed often and I had to go online and log in to add extra feeds. I also like to use as few resources or services as possible.</p><p>Then local converters such as <a
+href="https://www.google.be/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwiBm8yikMrWAhWBCBoKHfDdDi0QFggwMAE&amp;url=http%3A%2F%2Fnewspipe.sourceforge.net%2F&amp;usg=AFQjCNEANFszQVtDJDB4BQN6CgfnLXsc4w">newspipe</a> and <a
+href="http://www.allthingsrss.com/rss2email/">rss2email</a> got my attention but they are the main page was down and rss2email needed a specific format to read the links from and would write my mails into an incompatible and older version of mailbox.</p><h2>The DIY fix</h2><p>So I realized <a
+href="http://www.allthingsrss.com/rss2email/">rss2email </a>was written in Python (Yes!) and most of its heavy-lifting was done by a module called &#8220;feedparser&#8221;. So I wrote my own script to take a list of URL&#8217;s (of rss-feeds) and add them my local inbox in Maildir-format (I use the terminal application <a
+href="https://nl.wikipedia.org/wiki/Mutt">mutt</a> for my email). Many email-programs use this standardized format so research if yours is compatible. If you want to read a great article on how to set up Mutt I recommend <a
+href="https://wiki.archlinux.org/index.php/mutt">this Arch Linux post </a>and <a
+href="http://stevelosh.com/blog/2012/10/the-homely-mutt/">The Homely Mutt</a>.</p><p><img
+data-attachment-id="739" data-permalink="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/screenshot_2017-09-29_12-09-28/" data-orig-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?fit=970%2C185&amp;ssl=1" data-orig-size="970,185" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot_2017-09-29_12-09-28" data-image-description="" data-medium-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?fit=300%2C57&amp;ssl=1" data-large-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?fit=640%2C122&amp;ssl=1" class="alignnone wp-image-739 size-full" src="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=640%2C122&#038;ssl=1" alt="" srcset="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?w=970&amp;ssl=1 970w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=300%2C57&amp;ssl=1 300w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=768%2C146&amp;ssl=1 768w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=640%2C122&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p><p>So this is the command you can add to a macro or <a
+href="https://demgeeks.com/qt-make-the-command-line-easier-with-aliases-and-functions/">alias</a> to fetch the feeds form the <em>rss.txt</em> file in the <em>~/RSS/</em> directory and parse them offline into emails which will be added to the <em>~/MAILDIR/account/INBOX</em></p><pre>python ~/rss2maildir.py ~/RSS ~/MAILDIR/account/INBOX</pre><p><img
+data-attachment-id="742" data-permalink="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/screenshot_2017-09-29_12-12-37/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?fit=734%2C177&amp;ssl=1" data-orig-size="734,177" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot_2017-09-29_12-12-37" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?fit=300%2C72&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?fit=640%2C154&amp;ssl=1" class="alignnone wp-image-742 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?resize=640%2C154&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?w=734&amp;ssl=1 734w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?resize=300%2C72&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?resize=640%2C154&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p><p>You can find the script and an example rss.txt in <a
+href="https://github.com/polarsbear/rss2maildir">this Github-repo</a>. Feel free to give tips and share your experiences!</p><div
+class="sharedaddy sd-sharing-enabled"><div
+class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div
+class="sd-content"><ul><li
+class="share-twitter"><a
+rel="nofollow" data-shared="sharing-twitter-733" class="share-twitter sd-button share-icon no-text" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span
+class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li
+class="share-facebook"><a
+rel="nofollow" data-shared="sharing-facebook-733" class="share-facebook sd-button share-icon no-text" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span
+class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li
+class="share-google-plus-1"><a
+rel="nofollow" data-shared="sharing-google-733" class="share-google-plus-1 sd-button share-icon no-text" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/?share=google-plus-1" target="_blank" title="Click to share on Google+"><span></span><span
+class="sharing-screen-reader-text">Click to share on Google+ (Opens in new window)</span></a></li><li
+class="share-end"></li></ul></div></div></div><div
+id='jp-relatedposts' class='jp-relatedposts' ><h3 class="jp-relatedposts-headline"><em>Related</em></h3></div></div><footer><div
+class="td-post-source-tags"><ul
+class="td-tags td-post-small-box clearfix"><li><span>TAGS</span></li><li><a
+href="https://demgeeks.com/tag/bash/">bash</a></li><li><a
+href="https://demgeeks.com/tag/cli/">cli</a></li><li><a
+href="https://demgeeks.com/tag/command-line/">command-line</a></li><li><a
+href="https://demgeeks.com/tag/console-self-hosted-self-hosting-diy/">console. self-hosted. self-hosting. DIY</a></li><li><a
+href="https://demgeeks.com/tag/decentralization/">decentralization</a></li><li><a
+href="https://demgeeks.com/tag/development/">development</a></li><li><a
+href="https://demgeeks.com/tag/diy/">diy</a></li><li><a
+href="https://demgeeks.com/tag/email/">email</a></li><li><a
+href="https://demgeeks.com/tag/linux/">linux</a></li><li><a
+href="https://demgeeks.com/tag/mutt/">mutt</a></li><li><a
+href="https://demgeeks.com/tag/networking/">networking</a></li><li><a
+href="https://demgeeks.com/tag/news/">news</a></li><li><a
+href="https://demgeeks.com/tag/productivity/">productivity</a></li><li><a
+href="https://demgeeks.com/tag/rss/">rss</a></li><li><a
+href="https://demgeeks.com/tag/terminal/">terminal</a></li><li><a
+href="https://demgeeks.com/tag/tips/">tips</a></li><li><a
+href="https://demgeeks.com/tag/updates/">updates</a></li></ul></div><div
+class="td-block-row td-post-next-prev"><div
+class="td-block-span6 td-post-prev-post"><div
+class="td-post-next-prev-content"><span>Previous article</span><a
+href="https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/">Quick Tip: A script to resolve local network hostnames without extra services (Linux)</a></div></div><div
+class="td-next-prev-separator"></div><div
+class="td-block-span6 td-post-next-post"><div
+class="td-post-next-prev-content"><span>Next article</span><a
+href="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/">ELI5: How to boot a different operating system with a bootable USB drive</a></div></div></div><div
+class="author-box-wrap"><a
+href="https://demgeeks.com/author/lars-veelaert/"><img
+alt='' src='https://secure.gravatar.com/avatar/ec97a740b315536c9b137023a088c33f?s=96&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ec97a740b315536c9b137023a088c33f?s=192&amp;d=mm&amp;r=g 2x' class='avatar avatar-96 photo' height='96' width='96' /></a><div
+class="desc"><div
+class="td-author-name vcard author"><span
+class="fn"><a
+href="https://demgeeks.com/author/lars-veelaert/">Lars Veelaert</a></span></div><div
+class="td-author-description"></div><div
+class="td-author-social"></div><div
+class="clearfix"></div></div></div><div
+class="td-post-sharing td-post-sharing-bottom td-with-like"><span
+class="td-post-share-title">SHARE</span><div
+class="td-default-sharing">
+<a
+class="td-social-sharing-buttons td-social-facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+class="td-icon-facebook"></i><div
+class="td-social-but-text">Facebook</div></a>
+<a
+class="td-social-sharing-buttons td-social-twitter" href="https://twitter.com/intent/tweet?text=Get+all+your+updates+in+your+mailbox+with+RSS&url=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F&via=dem_geeks"><i
+class="td-icon-twitter"></i><div
+class="td-social-but-text">Twitter</div></a>
+<a
+class="td-social-sharing-buttons td-social-google" href="http://plus.google.com/share?url=https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+class="td-icon-googleplus"></i></a>
+<a
+class="td-social-sharing-buttons td-social-pinterest" href="http://pinterest.com/pin/create/button/?url=https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/&amp;media=https://demgeeks.com/wp-content/uploads/2017/09/tmi.jpg&description=Get+all+your+updates+in+your+mailbox+with+RSS" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+class="td-icon-pinterest"></i></a>
+<a
+class="td-social-sharing-buttons td-social-whatsapp" href="whatsapp://send?text=Get+all+your+updates+in+your+mailbox+with+RSS%20-%20https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F" ><i
+class="td-icon-whatsapp"></i></a></div><div
+class="td-classic-sharing"><ul><li
+class="td-classic-facebook"><iframe
+frameBorder="0" src="https://www.facebook.com/plugins/like.php?href=https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/&amp;layout=button_count&amp;show_faces=false&amp;width=105&amp;action=like&amp;colorscheme=light&amp;height=21" style="border:none; overflow:hidden; width:105px; height:21px; background-color:transparent;"></iframe></li><li
+class="td-classic-twitter"><a
+href="https://twitter.com/share" class="twitter-share-button" data-url="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/" data-text="Get all your updates in your mailbox with RSS" data-via="" data-lang="en">tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li></ul></div></div>	        <span
+style="display: none;" itemprop="author" itemscope itemtype="https://schema.org/Person"><meta
+itemprop="name" content="Lars Veelaert"></span><meta
+itemprop="datePublished" content="2017-09-29T10:11:30+00:00"><meta
+itemprop="dateModified" content="2017-09-30T12:18:00+00:00"><meta
+itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/"/><span
+style="display: none;" itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><span
+style="display: none;" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"><meta
+itemprop="url" content="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1-300x140.png"></span><meta
+itemprop="name" content="Dem Geeks"></span><meta
+itemprop="headline " content="Get all your updates in your mailbox with RSS"><span
+style="display: none;" itemprop="image" itemscope itemtype="https://schema.org/ImageObject"><meta
+itemprop="url" content="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/tmi.jpg?fit=752%2C636&ssl=1"><meta
+itemprop="width" content="752"><meta
+itemprop="height" content="636"></span>        </footer>
+</article><div
+class="comments" id="comments"><div
+id="respond" class="comment-respond"><h3 id="reply-title" class="comment-reply-title">LEAVE A REPLY <small><a
+rel="nofollow" id="cancel-comment-reply-link" href="/get-all-your-updates-in-your-mailbox-with-rss/#respond" style="display:none;">Cancel reply</a></small></h3><form
+action="https://demgeeks.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><div
+class="clearfix"></div><div
+class="comment-form-input-wrap td-form-comment"><textarea placeholder="Comment:" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea><div
+class="td-warning-comment">Please enter your comment!</div></div><div
+class="comment-form-input-wrap td-form-author">
+<input
+class="" id="author" name="author" placeholder="Name:*" type="text" value="" size="30"  aria-required='true' /><div
+class="td-warning-author">Please enter your name here</div></div><div
+class="comment-form-input-wrap td-form-email">
+<input
+class="" id="email" name="email" placeholder="Email:*" type="text" value="" size="30"  aria-required='true' /><div
+class="td-warning-email-error">You have entered an incorrect email address!</div><div
+class="td-warning-email">Please enter your email address here</div></div><div
+class="comment-form-input-wrap td-form-url">
+<input
+class="" id="url" name="url" placeholder="Website:" type="text" value="" size="30" /></div><p
+class="form-submit"><input
+name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input
+type='hidden' name='comment_post_ID' value='733' id='comment_post_ID' />
+<input
+type='hidden' name='comment_parent' id='comment_parent' value='0' /></p><p
+class="comment-subscription-form"><input
+type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label
+class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p
+class="comment-subscription-form"><input
+type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label
+class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p></form></div></div></div></div></div></div></div><div
+class="td-footer-ad td-container-wrap"></div><div
+class="td-footer-outer-wrapper td-container-wrap"><div
+class="td-footer-wrapper td-footer-template-2"><div
+class="td-container"><div
+class="td-pb-row"><div
+class="td-pb-span4"><div
+class="td_block_wrap td_block_3 td_uid_4_59f65667eacc6_rand td-pb-border-top td-column-1"  data-td-block-uid="td_uid_4_59f65667eacc6" ><script>var block_td_uid_4_59f65667eacc6 = new tdBlock();
+block_td_uid_4_59f65667eacc6.id = "td_uid_4_59f65667eacc6";
+block_td_uid_4_59f65667eacc6.atts = '{"limit":2,"sort":"featured","post_ids":"","tag_slug":"","autors_id":"","installed_post_types":"","category_id":"","category_ids":"","custom_title":"EDITOR PICKS","custom_url":"","show_child_cat":"","sub_cat_ajax":"","ajax_pagination":"","header_color":"","header_text_color":"","ajax_pagination_infinite_stop":"","td_column_number":1,"td_ajax_preloading":"","td_ajax_filter_type":"","td_ajax_filter_ids":"","td_filter_default_txt":"All","color_preset":"","border_top":"","class":"td_uid_4_59f65667eacc6_rand","el_class":"","offset":"","css":"","tdc_css":"","tdc_css_class":"td_uid_4_59f65667eacc6_rand","live_filter":"","live_filter_cur_post_id":"","live_filter_cur_post_author":""}';
+block_td_uid_4_59f65667eacc6.td_column_number = "1";
+block_td_uid_4_59f65667eacc6.block_type = "td_block_3";
+block_td_uid_4_59f65667eacc6.post_count = "0";
+block_td_uid_4_59f65667eacc6.found_posts = "0";
+block_td_uid_4_59f65667eacc6.header_color = "";
+block_td_uid_4_59f65667eacc6.ajax_pagination_infinite_stop = "";
+block_td_uid_4_59f65667eacc6.max_num_pages = "0";
+tdBlocksArray.push(block_td_uid_4_59f65667eacc6);</script><div
+class="td-block-title-wrap"><h4 class="block-title"><span>EDITOR PICKS</span></h4></div><div
+id=td_uid_4_59f65667eacc6 class="td_block_inner"></div></div></div><div
+class="td-pb-span4"><div
+class="td_block_wrap td_block_3 td_uid_5_59f65667ecdd3_rand td-pb-border-top td-column-1"  data-td-block-uid="td_uid_5_59f65667ecdd3" ><script>var block_td_uid_5_59f65667ecdd3 = new tdBlock();
+block_td_uid_5_59f65667ecdd3.id = "td_uid_5_59f65667ecdd3";
+block_td_uid_5_59f65667ecdd3.atts = '{"limit":2,"sort":"popular","post_ids":"","tag_slug":"","autors_id":"","installed_post_types":"","category_id":"","category_ids":"","custom_title":"POPULAR POSTS","custom_url":"","show_child_cat":"","sub_cat_ajax":"","ajax_pagination":"","header_color":"","header_text_color":"","ajax_pagination_infinite_stop":"","td_column_number":1,"td_ajax_preloading":"","td_ajax_filter_type":"","td_ajax_filter_ids":"","td_filter_default_txt":"All","color_preset":"","border_top":"","class":"td_uid_5_59f65667ecdd3_rand","el_class":"","offset":"","css":"","tdc_css":"","tdc_css_class":"td_uid_5_59f65667ecdd3_rand","live_filter":"","live_filter_cur_post_id":"","live_filter_cur_post_author":""}';
+block_td_uid_5_59f65667ecdd3.td_column_number = "1";
+block_td_uid_5_59f65667ecdd3.block_type = "td_block_3";
+block_td_uid_5_59f65667ecdd3.post_count = "2";
+block_td_uid_5_59f65667ecdd3.found_posts = "13";
+block_td_uid_5_59f65667ecdd3.header_color = "";
+block_td_uid_5_59f65667ecdd3.ajax_pagination_infinite_stop = "";
+block_td_uid_5_59f65667ecdd3.max_num_pages = "7";
+tdBlocksArray.push(block_td_uid_5_59f65667ecdd3);</script><div
+class="td-block-title-wrap"><h4 class="block-title"><span>POPULAR POSTS</span></h4></div><div
+id=td_uid_5_59f65667ecdd3 class="td_block_inner"><div
+class="td_module_3 td_module_wrap td-animation-stack" ><div
+class="td-module-image td-module-image-float"><div
+class="td-module-thumb"><a
+href="https://demgeeks.com/tip-running-a-terminal-command-through-a-proxy/" rel="bookmark" title="Quick tip: Running a terminal command through a proxy (Linux)"><img
+width="100" height="70" class="entry-thumb" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/02/proxies-14.png?resize=100%2C70&ssl=1" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/02/proxies-14.png?resize=100%2C70&ssl=1 100w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/02/proxies-14.png?zoom=2&resize=100%2C70&ssl=1 200w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/02/proxies-14.png?zoom=3&resize=100%2C70&ssl=1 300w" sizes="(max-width: 100px) 100vw, 100px" alt="" title="Quick tip: Running a terminal command through a proxy (Linux)"/></a></div></div><div
+class="td-item-details td-no-comment td-category-small"><h3 class="entry-title td-module-title"><a
+href="https://demgeeks.com/tip-running-a-terminal-command-through-a-proxy/" rel="bookmark" title="Quick tip: Running a terminal command through a proxy (Linux)">Quick tip: Running a terminal command through a proxy (Linux)</a></h3><div
+class="td-module-meta-info">
+<a
+href="https://demgeeks.com/category/quick-tips/" class="td-post-category">Quick Tips</a>                    <span
+class="td-post-date"><time
+class="entry-date updated td-module-date" datetime="2017-02-02T23:39:02+00:00" >February 2, 2017</time></span></div></div><div
+class="clearfix"></div></div><div
+class="td_module_3 td_module_wrap td-animation-stack" ><div
+class="td-module-image td-module-image-float"><div
+class="td-module-thumb"><a
+href="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/" rel="bookmark" title="ELI5: How to boot a different operating system with a bootable USB drive"><img
+width="100" height="70" class="entry-thumb" src="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/09/7-2-Boot-Device-Network-Menu.gif?resize=100%2C70&ssl=1" alt="" title="ELI5: How to boot a different operating system with a bootable USB drive"/></a></div></div><div
+class="td-item-details td-no-comment td-category-small"><h3 class="entry-title td-module-title"><a
+href="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/" rel="bookmark" title="ELI5: How to boot a different operating system with a bootable USB drive">ELI5: How to boot a different operating system with a bootable...</a></h3><div
+class="td-module-meta-info">
+<a
+href="https://demgeeks.com/category/eli5/" class="td-post-category">ELI5</a>                    <span
+class="td-post-date"><time
+class="entry-date updated td-module-date" datetime="2017-09-30T10:58:52+00:00" >September 30, 2017</time></span></div></div><div
+class="clearfix"></div></div></div></div></div><div
+class="td-pb-span4"><div
+class="td_block_wrap td_block_popular_categories td_uid_6_59f6566800a03_rand widget widget_categories td-pb-border-top"  data-td-block-uid="td_uid_6_59f6566800a03" ><h4 class="block-title"><span>POPULAR CATEGORY</span></h4><ul><li><a
+href="https://demgeeks.com/category/quick-tips/">Quick Tips<span
+class="td-cat-no">6</span></a></li><li><a
+href="https://demgeeks.com/category/hacking/">Hacking<span
+class="td-cat-no">5</span></a></li><li><a
+href="https://demgeeks.com/category/coding/">Coding<span
+class="td-cat-no">1</span></a></li><li><a
+href="https://demgeeks.com/category/eli5/">ELI5<span
+class="td-cat-no">1</span></a></li><li><a
+href="https://demgeeks.com/category/productivity/">Productivity<span
+class="td-cat-no">1</span></a></li></ul></div></div></div><div
+class="td-pb-row"><div
+class="td-pb-span12"><aside
+class="footer-social-wrap">
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.facebook.com/demgeeks/" title="Facebook">
+<i
+class="td-icon-font td-icon-facebook"></i>
+<span
+class="td-social-name">Facebook</span>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.linkedin.com/company/demgeeks.com" title="Linkedin">
+<i
+class="td-icon-font td-icon-linkedin"></i>
+<span
+class="td-social-name">Linkedin</span>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="mailto:questions@demgeeks.com" title="Mail">
+<i
+class="td-icon-font td-icon-mail-1"></i>
+<span
+class="td-social-name">Mail</span>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://twitter.com/dem_geeks" title="Twitter">
+<i
+class="td-icon-font td-icon-twitter"></i>
+<span
+class="td-social-name">Twitter</span>
+</a>
+</span>
+<span
+class="td-social-icon-wrap">
+<a
+target="_blank" href="https://www.youtube.com/channel/UC03g7GzJMI_fNL4tMj6wo7A" title="Youtube">
+<i
+class="td-icon-font td-icon-youtube"></i>
+<span
+class="td-social-name">Youtube</span>
+</a>
+</span></aside></div><div
+class="td-pb-span12"><aside
+class="footer-logo-wrap"><a
+href="https://demgeeks.com/"><img
+class="td-retina-data" src="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1_white-300x140.png" data-retina="https://www.demgeeks.com/wp-content/uploads/2017/02/demgeeks1_white-300x140.png" alt="" title=""/></a></aside></div></div></div></div><div
+class="td-sub-footer-container"><div
+class="td-container"><div
+class="td-pb-row"><div
+class="td-pb-span12 td-sub-footer-menu"><div
+class="menu-td-demo-footer-menu-container"><ul
+id="menu-td-demo-footer-menu" class="td-subfooter-menu"><li
+id="menu-item-349" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-first td-menu-item td-normal-menu menu-item-349"><a
+href="#">Home</a></li><li
+id="menu-item-350" class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-350"><a
+href="#">About</a></li><li
+id="menu-item-351" class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-351"><a
+href="#">contact</a></li></ul></div></div><div
+class="td-pb-span12 td-sub-footer-copy">
+&copy;</div></div></div></div></div></div><div
+style="display:none"><div
+class="grofile-hash-map-d41d8cd98f00b204e9800998ecf8427e"></div><div
+class="grofile-hash-map-ec97a740b315536c9b137023a088c33f"></div></div> <script type="text/javascript">window.WPCOM_sharing_counts = {"https:\/\/demgeeks.com\/get-all-your-updates-in-your-mailbox-with-rss\/":733};</script> <script type="text/javascript" src="https://demgeeks.com/wp-content/cache/minify/46435.js"></script> <script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201743'></script> <script type='text/javascript' src='https://secure.gravatar.com/js/gprofiles.js?ver=2017Octaa'></script> <script type='text/javascript'>/*  */
+var WPGroHo = {"my_hash":""};
+/*  */</script> <script type="text/javascript" src="https://demgeeks.com/wp-content/cache/minify/60bb9.js"></script> <script type='text/javascript'>/*<![CDATA[*//*  */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/demgeeks.com\/wp-admin\/admin-ajax.php","nonce":"8137994c2c","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/demgeeks.com\/wp-login.php?redirect_to=https%3A%2F%2Fdemgeeks.com%2Fget-all-your-updates-in-your-mailbox-with-rss%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/*  *//*]]>*/</script> <script type="text/javascript" src="https://demgeeks.com/wp-content/cache/minify/15416.js"></script> <script type='text/javascript'>/*  */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/*  */</script> <script type="text/javascript" src="https://demgeeks.com/wp-content/cache/minify/337c6.js"></script> <script type='text/javascript'>var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});</script>  <script>jQuery().ready(function jQuery_ready() {
+                    tdAjaxCount.tdGetViewsCountsAjax("post","[733]");
+                });
+            
+
+	
+
+		(function(){
+			var html_jquery_obj = jQuery('html');
+
+			if (html_jquery_obj.length && (html_jquery_obj.is('.ie8') || html_jquery_obj.is('.ie9'))) {
+
+				var path = 'https://demgeeks.com/wp-content/themes/IonMag/style.css';
+
+				jQuery.get(path, function(data) {
+
+					var str_split_separator = '#td_css_split_separator';
+					var arr_splits = data.split(str_split_separator);
+					var arr_length = arr_splits.length;
+
+					if (arr_length > 1) {
+
+						var dir_path = 'https://demgeeks.com/wp-content/themes/IonMag';
+						var splited_css = '';
+
+						for (var i = 0; i < arr_length; i++) {
+							if (i > 0) {
+								arr_splits[i] = str_split_separator + ' ' + arr_splits[i];
+							}
+							//jQuery('head').append('<style>' + arr_splits[i] + '</style>');
+
+							var formated_str = arr_splits[i].replace(/\surl\(\'(?!data\:)/gi, function regex_function(str) {
+								return ' url(\'' + dir_path + '/' + str.replace(/url\(\'/gi, '').replace(/^\s+|\s+$/gm,'');
+							});
+
+							splited_css += "<style>" + formated_str + "</style>";
+						}
+
+						var td_theme_css = jQuery('link#td-theme-css');
+
+						if (td_theme_css.length) {
+							td_theme_css.after(splited_css);
+						}
+					}
+				});
+			}
+		})();</script> <script type='text/javascript' src='https://stats.wp.com/e-201743.js' async defer></script> <script type='text/javascript'>_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:5.4',blog:'123547724',post:'733',tz:'0',srv:'demgeeks.com'} ]);
+	_stq.push([ 'clickTrackerInit', '123547724', '733' ]);</script> </body></html>

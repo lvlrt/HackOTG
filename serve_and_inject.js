@@ -11,7 +11,7 @@ http.createServer(function (req, res) {
 	  // parse URL
 	  const parsedUrl = url.parse(req.url);
 	  // extract URL path
-	  let pathname = `.${parsedUrl.pathname}`;
+	  var pathname = `.${parsedUrl.pathname}`;
 	  // based on the URL path, extract the file extention. e.g. .js, .doc, ...
 	  const ext = path.parse(pathname).ext;
 	  // maps file extention to MIME typere
@@ -40,6 +40,7 @@ http.createServer(function (req, res) {
 			          }
 
 		      // if is a directory search for index file matching the extention
+		  // TODO find a way to always serve the index file -> htm -> html -> php
 		      if (fs.statSync(pathname).isDirectory()) pathname += '/index' + ext;
 
 		      // read file from file system
