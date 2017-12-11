@@ -220,7 +220,8 @@ if answer == "0":
                 print(line.decode("utf-8"))
             p.communicate()
             
-            if len(os.listdir(directory+"/temp_wget")) > 0:
+            if os.path.exists(directory+"/temp_wget") and len(os.listdir(directory+"/temp_wget")) > 0:
+                print('exists')
                 # file exists
                 redirects=False
                 redirect_url=""
@@ -297,6 +298,11 @@ print("")
 
 #reroute
 p = Popen("sudo iptables -F && sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 9000", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+for line in p.stdout.read().splitlines():
+    if debug: 
+        print("[DEBUG]"+line.decode("utf-8"))
+
+p = Popen("iptables -A INPUT -i wlan0 -p udp --dport 53 -j ACCEPT && iptables -A PREROUTING -t nat -i wlan0 -p udp --dport 53 -j REDIRECT --to-port 53", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in p.stdout.read().splitlines():
     if debug: 
         print("[DEBUG]"+line.decode("utf-8"))
