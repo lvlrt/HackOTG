@@ -17,11 +17,8 @@ var renderPage = function (url) {
 
 	    page.onNavigationRequested = function(url, type, willNavigate, main) {
 		            if (main && url!=myurl) {
-				    		console.log("URL: "+url);
 				    	if (url == "about:blank") {
-						if (dump != "dump") {
 				    		console.log(myurl);
-						}
 				    		}
 				                myurl = url;
 				    		
@@ -33,9 +30,6 @@ var renderPage = function (url) {
 	    page.open(url, function(status) {
 		    page.evaluate(function() {
 			          });
-		    	if (dump =="dump") {
-				console.log(page.content);
-			}
 		            if (status==="success") {
 				                    phantom.exit(0);
 				            } else {
